@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auréthica – Test de Estilo</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Page-specific styles */
+      .test-container {
+        max-width: 600px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .test-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+      .test-container label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        font-weight: 600;
+      }
+      .test-container select {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      .test-container button {
+        margin-top: 1.5rem;
+        padding: 0.7rem 1.5rem;
+        background-color: #4a2cc2;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .test-container button:hover {
+        background-color: #35208a;
+      }
+      .result {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: #f4f4f8;
+        border-radius: 6px;
+        display: none;
+      }
+      .result h3 {
+        margin-top: 0;
+      }
+
+      /* New styles for card-based selection */
+      .styles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+      }
+      .style-card {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        background-color: #fff;
+      }
+      .style-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+      }
+      .style-card.selected {
+        border-color: #4a2cc2;
+        box-shadow: 0 0 4px rgba(74, 44, 194, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero" style="padding: 2rem 1rem; background: linear-gradient(135deg, #d9c8f4, #e3f0ff);">
+      <div class="hero-content">
+        <h1>Diagnóstico de Estilo</h1>
+        <p class="subtitle">Selecciona tu estilo actual y el que deseas alcanzar</p>
+      </div>
+    </header>
+    <div class="test-container">
+      <h2>Tu viaje de transformación</h2>
+      <p>Selecciona tu estilo actual:</p>
+      <div class="styles-grid" id="currentGrid"></div>
+      <p style="margin-top: 2rem;">Selecciona tu estilo deseado:</p>
+      <div class="styles-grid" id="desiredGrid"></div>
+      <button id="submitBtn">Ver recomendación</button>
+      <div class="result" id="result">
+        <h3 id="resultTitle"></h3>
+        <p id="resultMsg"></p>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>&copy; 2025 Auréthica. Todos los derechos reservados.</p>
+      <a href="index.html">Volver al inicio</a>
+      <a href="legal.html" style="margin-left: 1rem;">Términos y Condiciones</a>
+    </footer>
+    <script>
+      // Define our style categories and descriptions
+      const styles = [
+        { name: "Nebulosa", description: "Misteriosa y cambiante, como una nebulosa cósmica." },
+        { name: "Diamante", description: "Brillante y refinada, con facetas que iluminan." },
+        { name: "Eclipse", description: "Contrastes audaces, entre la luz y la sombra." },
+        { name: "Coral", description: "Cálida y viva, inspirada en arrecifes de coral." },
+        { name: "Brisa", description: "Fresca y ligera, como el viento de verano." },
+        { name: "Terra", description: "Arraigada y natural, conectada a la tierra." },
+        { name: "Sombra", description: "Sofisticada y enigmática, jugando con sombras." },
+        { name: "Aurora", description: "Luminosa y mágica, inspirada en el amanecer." },
+        { name: "Sirena", description: "Fluida y seductora, con aires marinos." },
+        { name: "Éter", description: "Ligera y etérea, casi intangible." },
+        { name: "Prisma", description: "Multicolor y versátil, descompone la luz." },
+        { name: "Fuego", description: "Apasionada e intensa, como las llamas." }
+      ];
+
+      // Initialize variables to store selections
+      let currentSelection = null;
+      let desiredSelection = null;
+
+      // Create style cards for a given container
+      function populateGrid(containerId) {
+        const grid = document.getElementById(containerId);
+        styles.forEach((style) => {
+          const card = document.createElement("div");
+          card.className = "style-card";
+          card.setAttribute("data-style", style.name);
+          card.innerHTML = `
+            <img src="data:image/png;base64,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" alt="${style.name}" />
+            <h3>${style.name}</h3>
+            <p>${style.description}</p>
+          `;
+          grid.appendChild(card);
+        });
+      }
+      // Populate both current and desired grids
+      populateGrid("currentGrid");
+      populateGrid("desiredGrid");
+      // Add click handlers for selection
+      function handleCardClick(e, type) {
+        const card = e.target.closest(".style-card");
+        if (!card) return;
+        const styleName = card.getAttribute("data-style");
+        if (type === "current") {
+          // Deselect previous
+          document.querySelectorAll("#currentGrid .style-card.selected").forEach((c) => c.classList.remove("selected"));
+          card.classList.add("selected");
+          currentSelection = styleName;
+        } else {
+          document.querySelectorAll("#desiredGrid .style-card.selected").forEach((c) => c.classList.remove("selected"));
+          card.classList.add("selected");
+          desiredSelection = styleName;
+        }
+      }
+      // Attach listeners
+      document.getElementById("currentGrid").addEventListener("click", (e) => handleCardClick(e, "current"));
+      document.getElementById("desiredGrid").addEventListener("click", (e) => handleCardClick(e, "desired"));
+
+      // On submit
+      document.getElementById("submitBtn").addEventListener("click", () => {
+        const resultDiv = document.getElementById("result");
+        const title = document.getElementById("resultTitle");
+        const msg = document.getElementById("resultMsg");
+        if (!currentSelection || !desiredSelection) {
+          alert("Selecciona ambos estilos para continuar.");
+          return;
+        }
+        if (currentSelection === desiredSelection) {
+          title.textContent = `¡Ya vives el estilo ${currentSelection}!`;
+          msg.textContent = `Disfruta plenamente de tu estilo ${currentSelection}. ` +
+            `Explora la galería para encontrar variaciones que mantengan tu esencia.`;
+        } else {
+          const desiredDesc = styles.find((s) => s.name === desiredSelection).description;
+          title.textContent = `De ${currentSelection} a ${desiredSelection}`;
+          msg.textContent = `Para pasar de ${currentSelection} a ${desiredSelection}, ` +
+            `te sugerimos incorporar elementos de ${desiredSelection} a tu look actual. ` +
+            `El estilo ${desiredSelection} se caracteriza por: ${desiredDesc}`;
+        }
+        resultDiv.style.display = "block";
+        // Scroll to result
+        resultDiv.scrollIntoView({ behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

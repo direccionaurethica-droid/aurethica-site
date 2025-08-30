@@ -1,0 +1,147 @@
+/* Base styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2a2a2a;
+  background-color: #fefefe;
+  line-height: 1.5;
+}
+
+a {
+  color: #4a2cc2;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  margin: 0.2em 0;
+}
+
+/* Hero section */
+.hero {
+  /* Remove gradient background for hero when using a banner image */
+  background: none;
+  color: #2a2a2a;
+  padding: 0;
+  text-align: center;
+}
+
+/* We no longer use hero-content for the banner version, but keep the class for backward compatibility */
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #4a2cc2;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cta-button:hover {
+  background-color: #35208a;
+}
+
+/* Styles for the hero banner and call-to-action */
+.hero-banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-cta {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+/* About section */
+.about {
+  padding: 3rem 1rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Gallery section */
+.gallery {
+  padding: 3rem 1rem;
+  background-color: #fafafa;
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Footer */
+.footer {
+  padding: 1.5rem 1rem;
+  background-color: #f4f4f4;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.footer a {
+  margin-left: 1rem;
+  color: #4a2cc2;
+  font-weight: 500;
+}
