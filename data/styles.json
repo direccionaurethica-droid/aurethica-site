@@ -1,0 +1,174 @@
+[
+{
+  "id": "fashionista",
+  "name": "Fashionista",
+  "group": "Presencia",
+  "keywords": ["color","contraste","detalles","impacto"],
+  "short": "Moda como lenguaje propio; arriesga e inspira.",
+  "images": [
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "diva-escenica",
+  "name": "Diva Escénica",
+  "group": "Presencia",
+  "keywords": ["brillo","volumen","teatral"],
+  "short": "Poder y espectáculo con glamour controlado.",
+  "images": [
+    "https://images.unsplash.com/photo-1532701026852-6aee6f3aa815?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1532701026852-6aee6f3aa815?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1532701026852-6aee6f3aa815?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1532701026852-6aee6f3aa815?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "creadora-tendencia",
+  "name": "Creadora de Tendencia",
+  "group": "Presencia",
+  "keywords": ["originalidad","innovación","audacia"],
+  "short": "Marca su propio camino, siempre un paso adelante.",
+  "images": [
+    "https://images.unsplash.com/photo-1552435330-a6a2c6f553d6?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1552435330-a6a2c6f553d6?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1552435330-a6a2c6f553d6?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1552435330-a6a2c6f553d6?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "ejecutiva",
+  "name": "Ejecutiva",
+  "group": "Versatilidad",
+  "keywords": ["sofisticación","profesionalismo","confianza"],
+  "short": "Elegancia funcional para liderar con aplomo.",
+  "images": [
+    "https://images.unsplash.com/photo-1520975849485-a548f6f87a04?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1520975849485-a548f6f87a04?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1520975849485-a548f6f87a04?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1520975849485-a548f6f87a04?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "urbanita",
+  "name": "Urbanita",
+  "group": "Versatilidad",
+  "keywords": ["dinámica","modernidad","calle"],
+  "short": "Fusiona comodidad y estilo con ritmo urbano.",
+  "images": [
+    "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "clasica-atemporal",
+  "name": "Clásica Atemporal",
+  "group": "Versatilidad",
+  "keywords": ["tradición","simplicidad","elegancia"],
+  "short": "Estilo eterno que nunca pasa de moda.",
+  "images": [
+    "https://images.unsplash.com/photo-1487412720507-1ad5af2a68a5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1487412720507-1ad5af2a68a5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1487412720507-1ad5af2a68a5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1487412720507-1ad5af2a68a5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "minimalista-elegante",
+  "name": "Minimalista Elegante",
+  "group": "Versatilidad",
+  "keywords": ["pureza","orden","delicadeza"],
+  "short": "Menos es más: líneas limpias y armonía.",
+  "images": [
+    "https://images.unsplash.com/photo-1495121605193-b116b5b9c2e8?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1495121605193-b116b5b9c2e8?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1495121605193-b116b5b9c2e8?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1495121605193-b116b5b9c2e8?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "ama-casa-moderna",
+  "name": "Ama de Casa Moderna",
+  "group": "Funcionalidad",
+  "keywords": ["práctica","calidez","hogar"],
+  "short": "Funcionalidad que se mezcla con afecto y estilo.",
+  "images": [
+    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "comoda-practica",
+  "name": "Cómoda/Práctica",
+  "group": "Funcionalidad",
+  "keywords": ["comodidad","versatilidad","sencillez"],
+  "short": "Prioriza confort sin renunciar al estilo.",
+  "images": [
+    "https://images.unsplash.com/photo-1522684462857-89e410d46ff5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1522684462857-89e410d46ff5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1522684462857-89e410d46ff5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1522684462857-89e410d46ff5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "deportista",
+  "name": "Deportista",
+  "group": "Funcionalidad",
+  "keywords": ["energía","movimiento","athleisure"],
+  "short": "Activo, cómodo y siempre listo para la acción.",
+  "images": [
+    "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "natural-bohemia",
+  "name": "Natural / Bohemia",
+  "group": "Funcionalidad",
+  "keywords": ["fluidez","artesanía","espontaneidad"],
+  "short": "Conecta con la naturaleza en equilibrio bohemio.",
+  "images": [
+    "https://images.unsplash.com/photo-1520974727688-b6004bb3937d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1520974727688-b6004bb3937d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1520974727688-b6004bb3937d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1520974727688-b6004bb3937d?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ]
+},
+{
+  "id": "en-busqueda",
+  "name": "En búsqueda",
+  "group": "Transicional",
+  "keywords": ["exploración","aprendizaje","transición"],
+  "short": "Aún descubriendo su identidad estilística.",
+  "images": [
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ],
+  "meta": { "type": "transitional" }
+}
+]
+{
+  "id": "en-busqueda",
+  "name": "En búsqueda",
+  "group": "Transicional",
+  "keywords": ["exploración","aprendizaje","transición"],
+  "short": "Aún descubriendo su identidad estilística.",
+  "images": [
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
+    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
+  ],
+  "meta": { "type": "transitional" }
+}
+]
