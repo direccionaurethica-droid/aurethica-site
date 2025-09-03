@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Auréthica – Mapa de Estilo Personal</title>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #f4f2ef;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #221f20;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .option {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      width: calc(50% - 1rem);
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+    .option:hover {
+      border-color: #a4a2cc;
+    }
+    .option img {
+      max-width: 50px;
+      max-height: 50px;
+      margin-right: 0.75rem;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Auréthica – Mapa de Estilo Personal</h1>
+  
+  <!-- Pregunta 1 -->
+  <section id="pregunta1">
+    <div class="question">¿Te gusta que tu ropa llame la atención? ¿La usas como forma de expresión?</div>
+    <div class="options">
+      <div class="option" id="resp1" onclick="mostrarPregunta2('1')">
+        <img src="https://source.unsplash.com/50x50/?fashion,expression" alt="Ropa como expresión" />
+        <span>Sí, la ropa es una forma de expresión</span>
+      </div>
+      <div class="option" id="resp2" onclick="mostrarPregunta2('2')">
+        <img src="https://source.unsplash.com/50x50/?minimal,fashion" alt="Ropa básica" />
+        <span>No, prefiero básicos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pregunta 2 para respuesta 1 -->
+  <section id="pregunta2_1" class="hidden">
+    <div class="question">¿Qué lugar ocupan los complementos en tu día a día?</div>
+    <div class="options">
+      <div class="option" onclick="seleccionarRespuesta('1A')">
+        <img src="https://source.unsplash.com/50x50/?statement,jewellery" alt="Complementos llamativos" />
+        <span>Complementos obligatorios, siempre elevan el look</span>
+      </div>
+      <div class="option" onclick="seleccionarRespuesta('1B')">
+        <img src="https://source.unsplash.com/50x50/?classic,accessories" alt="Complementos moderados" />
+        <span>Complementos importantes, en su medida</span>
+      </div>
+      <div class="option" onclick="seleccionarRespuesta('1C')">
+        <img src="https://source.unsplash.com/50x50/?minimal,accessories" alt="Complementos básicos" />
+        <span>Complementos básicos, siempre los mismos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pregunta 2 para respuesta 2 -->
+  <section id="pregunta2_2" class="hidden">
+    <div class="question">¿Qué lugar ocupan los complementos en tu día a día?</div>
+    <div class="options">
+      <div class="option" onclick="seleccionarRespuesta('2A')">
+        <img src="https://source.unsplash.com/50x50/?classic,earrings" alt="Complementos clásicos" />
+        <span>Clásica: Pendientes obligatorios, los combino según la ocasión</span>
+      </div>
+      <div class="option" onclick="seleccionarRespuesta('2B')">
+        <img src="https://source.unsplash.com/50x50/?minimal,jewellery" alt="Complementos mínimos" />
+        <span>Lo mínimo: casi nada, solo lo que llevo para dormir</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resultado -->
+  <section id="resultado" class="hidden">
+    <div class="question">¡Gracias por completar el test!</div>
+    <p>Has elegido: <span id="resultadoTexto"></span></p>
+  </section>
+
+  <script>
+    function mostrarPregunta2(respuesta) {
+      document.getElementById('pregunta1').style.display = 'none';
+      if (respuesta === '1') {
+        document.getElementById('pregunta2_1').classList.remove('hidden');
+      } else {
+        document.getElementById('pregunta2_2').classList.remove('hidden');
+      }
+    }
+    function seleccionarRespuesta(opcion) {
+      document.getElementById('pregunta2_1').classList.add('hidden');
+      document.getElementById('pregunta2_2').classList.add('hidden');
+      document.getElementById('resultado').classList.remove('hidden');
+      document.getElementById('resultadoTexto').innerText = opcion;
+    }
+  </script>
+</body>
+</html>
