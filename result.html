@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado - Auréthica</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .result-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .style-summary {
+      margin: 20px 0;
+    }
+    .style-summary h2 {
+      margin: 10px 0;
+      font-size: 1.4em;
+      color: #a48a5e;
+    }
+    .restart-button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      background-color: #a48a5e;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h1>Tu resultado</h1>
+    <div id="dominant" class="style-summary"></div>
+    <div id="secondary" class="style-summary"></div>
+    <p>Este es un resultado preliminar basado en tus selecciones. Próximamente integraremos recomendaciones completas.</p>
+    <button class="restart-button" id="restartBtn">Reiniciar test</button>
+  </div>
+  <script>
+    function loadResult() {
+      const desired = JSON.parse(localStorage.getItem('desired') || '[]');
+      const current = JSON.parse(localStorage.getItem('current') || '[]');
+      fetch('data/styles.json')
+        .then(res => res.json())
+        .then(data => {
+          const stylesById = {};
+          data.forEach(style => {
+            stylesById[style.id] = style;
+          });
+          const dominantId = desired[0] || current[0];
+          const secondaryId = desired[1] || '';
+          if (dominantId && stylesById[dominantId]) {
+            const s = stylesById[dominantId];
+            document.getElementById('dominant').innerHTML = '<h2>Estilo dominante: ' + s.name + '</h2><p>' + s.short + '</p>';
+          }
+          if (secondaryId && stylesById[secondaryId]) {
+            const s2 = stylesById[secondaryId];
+            document.getElementById('secondary').innerHTML = '<h2>Estilo secundario: ' + s2.name + '</h2><p>' + s2.short + '</p>';
+          }
+        })
+        .catch(err => {
+          document.getElementById('dominant').innerText = 'No se pudo cargar el resultado.';
+        });
+    }
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      localStorage.removeItem('desired');
+      localStorage.removeItem('current');
+      window.location.href = 'gallery.html';
+    });
+    loadResult();
+  </script>
+</body>
+</html>
