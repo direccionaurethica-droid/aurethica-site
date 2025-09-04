@@ -1,0 +1,23 @@
+# Global owners - These users will be requested for review when someone opens a pull request
+* @direccionaurethica-droid
+
+# API and backend code
+/api/ @direccionaurethica-droid
+
+# Configuration files
+/.github/ @direccionaurethica-droid
+/.gitignore @direccionaurethica-droid
+/package*.json @direccionaurethica-droid
+
+# Documentation
+/README.md @direccionaurethica-droid
+/CONTRIBUTING.md @direccionaurethica-droid
+/SECURITY.md @direccionaurethica-droid
+
+# Frontend assets
+/*.html @direccionaurethica-droid
+/*.css @direccionaurethica-droid
+/*.js @direccionaurethica-droid
+
+# Data files
+/data/ @direccionaurethica-droid

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Disallow API endpoints from crawling
+Disallow: /api/
+
+# Allow specific pages
+Allow: /index.html
+Allow: /test.html
+Allow: /gallery.html
+Allow: /onboarding.html
+Allow: /result.html
+Allow: /current.html
+Allow: /legal.html
+
+# Sitemap (to be added when available)
+# Sitemap: https://direccionaurethica-droid.github.io/aurethica-site/sitemap.xml

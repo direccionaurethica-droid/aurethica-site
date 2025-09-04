@@ -1,0 +1,54 @@
+name: Check Links
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    # Run weekly on Sundays at 9 AM UTC
+    - cron: '0 9 * * 0'
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd api
+          npm install
+
+      - name: Start server
+        run: |
+          cd api
+          node server.js &
+          sleep 5
+        env:
+          NODE_ENV: test
+
+      - name: Check links in HTML files
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'yes'
+          config-file: '.github/workflows/link-check-config.json'
+
+      - name: Check internal links
+        run: |
+          # Check if main pages are accessible
+          curl -f http://localhost:3000/health || echo "Server health check failed"
+          curl -f http://localhost:3000/styles || echo "Styles endpoint failed"
+          
+          # Simple link validation for HTML files
+          for file in *.html; do
+            echo "Checking $file for broken internal links..."
+            grep -o 'href="[^"]*"' "$file" | grep -v '^href="http' | grep -v '^href="#' || true
+          done

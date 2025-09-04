@@ -1,0 +1,73 @@
+name: 🐛 Reporte de Bug
+description: Crea un reporte para ayudarnos a mejorar
+title: "[BUG] "
+labels: ["bug", "triage"]
+assignees:
+  - direccionaurethica-droid
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tomarte el tiempo de completar este reporte de bug.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: ¿Qué pasó?
+      description: También cuéntanos qué esperabas que pasara.
+      placeholder: Describe el bug aquí...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      description: ¿Qué pasos llevaron a este comportamiento?
+      placeholder: |
+        1. Ve a '...'
+        2. Haz clic en '....'
+        3. Desplázate hacia abajo hasta '....'
+        4. Ve el error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento esperado
+      description: Una descripción clara y concisa de lo que esperabas que pasara.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Capturas de pantalla
+      description: Si aplica, añade capturas de pantalla para ayudar a explicar tu problema.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Información del entorno
+      description: |
+        Ejemplo:
+          - Navegador: Chrome
+          - Versión: 22
+          - Dispositivo: iPhone12
+          - SO: iOS8.1
+      value: |
+        - Navegador:
+        - Versión:
+        - Dispositivo:
+        - SO:
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto adicional
+      description: Añade cualquier otro contexto sobre el problema aquí.

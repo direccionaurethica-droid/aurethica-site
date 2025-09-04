@@ -1,0 +1,54 @@
+name: ✨ Solicitud de Funcionalidad
+description: Sugiere una idea para el proyecto
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+assignees:
+  - direccionaurethica-droid
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tomarte el tiempo de sugerir una mejora.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: ¿Está tu solicitud de funcionalidad relacionada con un problema?
+      description: Una descripción clara y concisa de cuál es el problema.
+      placeholder: Estoy frustrado cuando...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe la solución que te gustaría
+      description: Una descripción clara y concisa de lo que quieres que pase.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe alternativas que hayas considerado
+      description: Una descripción clara y concisa de cualquier solución o funcionalidad alternativa que hayas considerado.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad
+      description: ¿Qué tan importante es esta funcionalidad para ti?
+      options:
+        - Baja
+        - Media
+        - Alta
+        - Crítica
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto adicional
+      description: Añade cualquier otro contexto o capturas de pantalla sobre la solicitud de funcionalidad aquí.
