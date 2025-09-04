@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discusiones Generales
+    url: https://github.com/direccionaurethica-droid/aurethica-site/discussions
+    about: Para preguntas generales, ideas o conversaciones sobre el proyecto
+  - name: 🔒 Reporte de Seguridad
+    url: https://github.com/direccionaurethica-droid/aurethica-site/security/advisories/new
+    about: Para reportar vulnerabilidades de seguridad de forma privada

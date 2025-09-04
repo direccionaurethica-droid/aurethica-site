@@ -1,0 +1,43 @@
+name: 📚 Mejora de Documentación
+description: Sugiere mejoras en la documentación
+title: "[DOCS] "
+labels: ["documentation", "triage"]
+assignees:
+  - direccionaurethica-droid
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por ayudarnos a mejorar nuestra documentación.
+
+  - type: textarea
+    id: section
+    attributes:
+      label: ¿Qué sección de la documentación necesita mejora?
+      description: Especifica qué archivo, página o sección necesita atención.
+      placeholder: README.md, CONTRIBUTING.md, comentarios en código, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: ¿Cuál es el problema con la documentación actual?
+      description: Describe qué está mal, qué falta, o qué es confuso.
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: ¿Cómo se puede mejorar?
+      description: Sugiere cómo la documentación podría ser más clara o completa.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Información adicional
+      description: Cualquier contexto adicional que pueda ser útil.
