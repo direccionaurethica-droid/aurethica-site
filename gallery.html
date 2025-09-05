@@ -120,5 +120,16 @@
     });
     updateSelectionInfo();
   </script>
+  
+  <!-- Auréthica API Integration -->
+  <script src="assets/js/api.js"></script>
+  <script>
+    // API connectivity verification
+    if (window.AurethicaAPI) {
+      window.AurethicaAPI.checkHealth()
+        .then(health => console.log('API Health:', health))
+        .catch(err => console.warn('API not available:', err));
+    }
+  </script>
 </body>
 </html>
