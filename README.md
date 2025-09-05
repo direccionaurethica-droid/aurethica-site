@@ -11,7 +11,42 @@ Este repositorio contiene la interfaz web estática del test y landing de Aurét
 
 ## Desarrollo
 
-El sitio está basado en HTML y CSS puro para este MVP y se sirve mediante GitHub Pages. Puedes desplegar una versión local clonando el repositorio y abriendo `index.html` en tu navegador.
+El sitio está basado en HTML y CSS puro para este MVP. Puedes desplegar una versión local clonando el repositorio y abriendo `index.html` en tu navegador.
+
+## Despliegue
+
+### GitHub Pages
+El sitio se puede servir mediante GitHub Pages para un despliegue simple de archivos estáticos.
+
+### Vercel (Recomendado)
+El sitio está configurado para desplegarse en Vercel con soporte completo para el frontend estático y la API backend.
+
+#### URLs de Despliegue y Preview
+- **URL de Producción**: Se generará automáticamente al conectar el repositorio con Vercel
+- **URLs de Preview**: Cada PR genera automáticamente una URL de preview única
+- **URL de Desarrollo**: Disponible localmente en `http://localhost:3000` para el API
+
+#### Configuración del Proyecto Vercel
+1. **Crear proyecto en Vercel**:
+   - Ve a [vercel.com](https://vercel.com) y conecta tu cuenta de GitHub
+   - Importa este repositorio como un nuevo proyecto
+   - Vercel detectará automáticamente la configuración desde `vercel.json`
+
+2. **Configurar dominio personalizado** (opcional):
+   - En el dashboard del proyecto, ve a Settings > Domains
+   - Añade tu dominio personalizado
+   - Configura los registros DNS según las instrucciones de Vercel
+
+3. **Variables de entorno** (si es necesario en el futuro):
+   - En Settings > Environment Variables
+   - Añade las variables necesarias para producción, preview y desarrollo
+
+La configuración en `vercel.json` incluye:
+- **Clean URLs**: URLs sin extensión `.html` (ej: `/test` en lugar de `/test.html`)
+- **Cache-Control**: Headers optimizados para assets estáticos (1 año) y HTML (1 hora)
+- **API Routes**: El backend en `/api` puede requerir adaptación para funciones serverless de Vercel
+
+> **Nota**: El servidor Express actual está diseñado para ejecución tradicional. Para despliegue en Vercel, considera convertir las rutas del API a funciones serverless individuales en el directorio `/api` si experimentas problemas con el servidor Express completo.
 
 ---
 
