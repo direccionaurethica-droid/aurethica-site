@@ -1,0 +1,19 @@
+{
+  "name": "aurethica-site",
+  "version": "1.0.0",
+  "description": "Auréthica frontend and API development environment",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
+    "dev:frontend": "http-server . -p 3000 -c-1",
+    "dev:api": "cd api && npm start",
+    "install:all": "npm install && cd api && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
