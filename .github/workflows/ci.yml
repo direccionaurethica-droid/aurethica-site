@@ -1,0 +1,180 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Link checking job
+  link-check:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Install link checker
+        run: npm install -g markdown-link-check
+
+      - name: Check links in HTML files
+        run: |
+          # Check for broken links in HTML files
+          find . -name "*.html" -not -path "./node_modules/*" -not -path "./api/node_modules/*" | while read file; do
+            echo "Checking links in $file"
+            # Extract links from HTML and check them
+            grep -oE 'href="[^"]*"' "$file" | sed 's/href="//; s/"//' | grep -E '^https?://' | while read url; do
+              if ! curl -s --head "$url" | head -n 1 | grep -q "200 OK"; then
+                echo "❌ Broken link in $file: $url"
+                exit 1
+              else
+                echo "✅ $url"
+              fi
+            done
+          done
+
+  # HTML validation job
+  validation:
+    name: HTML & CSS Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Install validation tools
+        run: npm install -g html-validate
+
+      - name: Validate HTML files
+        run: |
+          echo "Validating HTML files..."
+          find . -name "*.html" -not -path "./node_modules/*" -not -path "./api/node_modules/*" | while read file; do
+            echo "Validating $file"
+            npx html-validate "$file"
+          done
+
+      - name: Check CSS syntax
+        run: |
+          echo "Checking CSS files..."
+          find . -name "*.css" -not -path "./node_modules/*" -not -path "./api/node_modules/*" | while read file; do
+            echo "Checking $file"
+            # Basic CSS syntax check using Node.js
+            node -e "
+              const fs = require('fs');
+              const css = fs.readFileSync('$file', 'utf8');
+              // Simple check for unmatched braces
+              const openBraces = (css.match(/{/g) || []).length;
+              const closeBraces = (css.match(/}/g) || []).length;
+              if (openBraces !== closeBraces) {
+                console.error('❌ Unmatched braces in $file');
+                process.exit(1);
+              } else {
+                console.log('✅ $file syntax OK');
+              }
+            "
+          done
+
+  # API tests job
+  api-test:
+    name: API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Start API server
+        run: |
+          cd api
+          npm start &
+          echo $! > api.pid
+          sleep 5  # Wait for server to start
+
+      - name: Test API endpoints
+        run: |
+          echo "Testing API health check..."
+          curl -f http://localhost:3001/health || exit 1
+          
+          echo "Testing API info endpoint..."
+          curl -f http://localhost:3001/api || exit 1
+          
+          echo "Testing styles endpoint..."
+          curl -f http://localhost:3001/api/styles || exit 1
+          
+          echo "Testing onboarding endpoint..."
+          curl -f http://localhost:3001/api/onboarding || exit 1
+          
+          echo "Testing tips endpoint..."
+          curl -f http://localhost:3001/api/tips || exit 1
+          
+          echo "Testing messages endpoint..."
+          curl -f http://localhost:3001/api/messages || exit 1
+          
+          echo "All API tests passed! ✅"
+
+      - name: Stop API server
+        run: |
+          if [ -f api/api.pid ]; then
+            kill $(cat api/api.pid) || true
+            rm api/api.pid
+          fi
+
+  # Code quality job
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Check JavaScript files
+        run: |
+          echo "Checking JavaScript files..."
+          find . -name "*.js" -not -path "./node_modules/*" -not -path "./api/node_modules/*" | while read file; do
+            echo "Checking $file"
+            # Basic syntax check
+            node -c "$file" && echo "✅ $file syntax OK" || exit 1
+          done
+
+      - name: Check JSON files
+        run: |
+          echo "Checking JSON files..."
+          find . -name "*.json" -not -path "./node_modules/*" -not -path "./api/node_modules/*" -not -name "package-lock.json" | while read file; do
+            echo "Checking $file"
+            node -e "JSON.parse(require('fs').readFileSync('$file', 'utf8'))" && echo "✅ $file is valid JSON" || exit 1
+          done

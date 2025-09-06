@@ -40,3 +40,8 @@ temp/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Testing artifacts
+api/api.pid
+coverage/
+test-results/

@@ -1,0 +1,28 @@
+# CODEOWNERS file for Auréthica Site
+# This file defines who owns and is responsible for reviewing different parts of the codebase
+
+# Global owners - responsible for all code by default
+* @direccionaurethica-droid
+
+# Frontend code owners
+*.html @direccionaurethica-droid
+*.css @direccionaurethica-droid
+*.js @direccionaurethica-droid
+assets/ @direccionaurethica-droid
+data/ @direccionaurethica-droid
+
+# API and backend code owners
+api/ @direccionaurethica-droid
+
+# Documentation owners
+*.md @direccionaurethica-droid
+docs/ @direccionaurethica-droid
+
+# Configuration and build files
+package.json @direccionaurethica-droid
+package-lock.json @direccionaurethica-droid
+vercel.json @direccionaurethica-droid
+.github/ @direccionaurethica-droid
+
+# Legal and compliance
+legal.html @direccionaurethica-droid

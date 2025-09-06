@@ -157,18 +157,3 @@
   "meta": { "type": "transitional" }
 }
 ]
-{
-  "id": "en-busqueda",
-  "name": "En búsqueda",
-  "group": "Transicional",
-  "keywords": ["exploración","aprendizaje","transición"],
-  "short": "Aún descubriendo su identidad estilística.",
-  "images": [
-    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=1",
-    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=2",
-    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=3",
-    "https://images.unsplash.com/photo-1541101767792-f9b2b1c4b8b5?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940&sig=4"
-  ],
-  "meta": { "type": "transitional" }
-}
-]

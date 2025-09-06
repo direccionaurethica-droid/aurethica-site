@@ -7,11 +7,20 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:api\"",
     "dev:frontend": "http-server . -p 3000 -c-1",
     "dev:api": "cd api && npm start",
-    "install:all": "npm install && cd api && npm install"
+    "install:all": "npm install && cd api && npm install",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js && npm run lint:json",
+    "lint:html": "html-validate *.html",
+    "lint:css": "node scripts/check-css.js",
+    "lint:js": "node scripts/check-js.js", 
+    "lint:json": "node scripts/check-json.js",
+    "test": "npm run test:api",
+    "test:api": "node scripts/test-api.js",
+    "check-links": "node scripts/check-links.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "html-validate": "^8.7.4"
   },
   "engines": {
     "node": ">=16.0.0"
