@@ -39,13 +39,95 @@
     <h1>Tu resultado</h1>
     <div id="dominant" class="style-summary"></div>
     <div id="secondary" class="style-summary"></div>
-    <p>Este es un resultado preliminar basado en tus selecciones. Próximamente integraremos recomendaciones completas.</p>
+    <div id="tips" class="tips-section" style="margin: 20px 0; padding: 15px; background-color: #f8f6f0; border-radius: 6px;">
+      <h3 style="margin-top: 0; color: #a48a5e;">Consejos para ti</h3>
+      <div id="tipsContent"></div>
+    </div>
+    <div id="messages" class="messages-section" style="margin: 20px 0; padding: 15px; background-color: #f0f4f8; border-radius: 6px;">
+      <h3 style="margin-top: 0; color: #5a7a8a;">Mensajes especiales</h3>
+      <div id="messagesContent"></div>
+    </div>
+    <p>Este es un resultado personalizado basado en tus selecciones y análisis de estilo.</p>
     <button class="restart-button" id="restartBtn">Reiniciar test</button>
   </div>
   <script>
-    function loadResult() {
+    // Load result data from multiple API endpoints
+    async function loadResult() {
       const desired = JSON.parse(localStorage.getItem('desired') || '[]');
       const current = JSON.parse(localStorage.getItem('current') || '[]');
+      
+      try {
+        // Load styles data
+        const styles = await window.AurethicaUI.apiCallWithStates(
+          'dominant',
+          () => window.AurethicaAPI.getStyles(),
+          'Cargando análisis de estilo...'
+        );
+        
+        const stylesById = {};
+        styles.forEach(style => {
+          stylesById[style.id] = style;
+        });
+        
+        const dominantId = desired[0] || current[0];
+        const secondaryId = desired[1] || '';
+        
+        if (dominantId && stylesById[dominantId]) {
+          const s = stylesById[dominantId];
+          document.getElementById('dominant').innerHTML = '<h2>Estilo dominante: ' + s.name + '</h2><p>' + s.short + '</p>';
+        }
+        if (secondaryId && stylesById[secondaryId]) {
+          const s2 = stylesById[secondaryId];
+          document.getElementById('secondary').innerHTML = '<h2>Estilo secundario: ' + s2.name + '</h2><p>' + s2.short + '</p>';
+        }
+        
+        // Load tips
+        try {
+          const tips = await window.AurethicaUI.apiCallWithStates(
+            'tipsContent',
+            () => window.AurethicaAPI.getTips(),
+            'Cargando consejos...'
+          );
+          
+          if (tips && tips.length > 0) {
+            const randomTips = tips.sort(() => 0.5 - Math.random()).slice(0, 3);
+            document.getElementById('tipsContent').innerHTML = randomTips.map(tip => 
+              `<div style="margin-bottom: 10px;">• ${tip.content || tip.text || tip.tip}</div>`
+            ).join('');
+          }
+        } catch (error) {
+          console.error('Failed to load tips:', error);
+        }
+        
+        // Load messages
+        try {
+          const messages = await window.AurethicaUI.apiCallWithStates(
+            'messagesContent',
+            () => window.AurethicaAPI.getMessages(),
+            'Cargando mensajes...'
+          );
+          
+          if (messages && messages.length > 0) {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('messagesContent').innerHTML = 
+              `<div style="font-style: italic;">${randomMessage.content || randomMessage.message || randomMessage.text}</div>`;
+          }
+        } catch (error) {
+          console.error('Failed to load messages:', error);
+        }
+        
+      } catch (error) {
+        console.error('Failed to load result data:', error);
+        // Fallback to local data
+        loadResultFallback();
+      }
+    }
+    
+    // Fallback function using local data
+    function loadResultFallback() {
+      const desired = JSON.parse(localStorage.getItem('desired') || '[]');
+      const current = JSON.parse(localStorage.getItem('current') || '[]');
+      
       fetch('data/styles.json')
         .then(res => res.json())
         .then(data => {
@@ -65,19 +147,27 @@
           }
         })
         .catch(err => {
-          document.getElementById('dominant').innerText = 'No se pudo cargar el resultado.';
+          document.getElementById('dominant').innerHTML = '<p style="color: #d32f2f;">No se pudo cargar el resultado.</p>';
         });
     }
+    
     document.getElementById('restartBtn').addEventListener('click', () => {
       localStorage.removeItem('desired');
       localStorage.removeItem('current');
       window.location.href = 'gallery.html';
     });
-    loadResult();
+    
+    // Initialize result loading
+    if (window.AurethicaAPI && window.AurethicaUI) {
+      loadResult();
+    } else {
+      loadResultFallback();
+    }
   </script>
   
   <!-- Auréthica API Integration -->
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-utils.js"></script>
   <script>
     // API connectivity verification
     if (window.AurethicaAPI) {

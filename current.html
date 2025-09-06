@@ -100,9 +100,16 @@
       }
       updateSelectionInfo();
     }
-    fetch('data/styles.json')
-      .then(res => res.json())
-      .then(data => {
+    // Load styles data from API
+    async function loadStylesData() {
+      try {
+        const data = await window.AurethicaUI.apiCallWithStates(
+          stylesGrid,
+          () => window.AurethicaAPI.getStyles(),
+          'Cargando estilos...'
+        );
+        
+        // Render style cards
         data.forEach(style => {
           const card = document.createElement('div');
           card.className = 'style-card';
@@ -110,10 +117,32 @@
           card.addEventListener('click', () => toggleCard(card, style.id));
           stylesGrid.appendChild(card);
         });
-      })
-      .catch(err => {
-        stylesGrid.innerHTML = '<p>Error loading styles.</p>';
-      });
+      } catch (error) {
+        console.error('Failed to load styles:', error);
+        // Error state is already handled by apiCallWithStates
+      }
+    }
+
+    // Initialize styles loading
+    if (window.AurethicaAPI && window.AurethicaUI) {
+      loadStylesData();
+    } else {
+      // Fallback to local data if API is not available
+      fetch('data/styles.json')
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(style => {
+            const card = document.createElement('div');
+            card.className = 'style-card';
+            card.innerHTML = '<img src="' + style.images[0] + '" alt="' + style.name + '"><div class="info"><h3>' + style.name + '</h3><p>' + style.short + '</p></div>';
+            card.addEventListener('click', () => toggleCard(card, style.id));
+            stylesGrid.appendChild(card);
+          });
+        })
+        .catch(err => {
+          window.AurethicaUI.showError(stylesGrid, 'Error al cargar los estilos. Por favor, recarga la página.');
+        });
+    }
     continueBtn.addEventListener('click', () => {
       const currentSelection = Array.from(selectedStyles);
       localStorage.setItem('current', JSON.stringify(currentSelection));
@@ -124,6 +153,7 @@
   
   <!-- Auréthica API Integration -->
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-utils.js"></script>
   <script>
     // API connectivity verification
     if (window.AurethicaAPI) {

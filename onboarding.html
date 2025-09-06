@@ -78,10 +78,18 @@
           btn.disabled = true;
         }
       }
-      fetch('data/onboarding.json')
-        .then(resp => resp.json())
-        .then(data => {
-          const container = document.getElementById('onboardingContainer');
+      // Load onboarding data from API
+      async function loadOnboardingData() {
+        const container = document.getElementById('onboardingContainer');
+        
+        try {
+          const data = await window.AurethicaUI.apiCallWithStates(
+            container,
+            () => window.AurethicaAPI.getOnboarding(),
+            'Cargando preguntas...'
+          );
+          
+          // Render onboarding questions
           data.forEach(question => {
             const qDiv = document.createElement('div');
             qDiv.className = 'question-block';
@@ -105,7 +113,50 @@
             qDiv.appendChild(optionsGrid);
             container.appendChild(qDiv);
           });
-        });
+        } catch (error) {
+          console.error('Failed to load onboarding data:', error);
+          // Error state is already handled by apiCallWithStates
+        }
+      }
+
+      // Initialize onboarding on page load
+      if (window.AurethicaAPI && window.AurethicaUI) {
+        loadOnboardingData();
+      } else {
+        // Fallback to local data if API is not available
+        fetch('data/onboarding.json')
+          .then(resp => resp.json())
+          .then(data => {
+            const container = document.getElementById('onboardingContainer');
+            data.forEach(question => {
+              const qDiv = document.createElement('div');
+              qDiv.className = 'question-block';
+              const h3 = document.createElement('h3');
+              h3.textContent = question.question;
+              qDiv.appendChild(h3);
+              const optionsGrid = document.createElement('div');
+              optionsGrid.className = 'options-grid';
+              question.options.forEach(option => {
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.innerHTML = '<img src="' + option.image + '" alt="" />' + '<p>' + option.text + '</p>';
+                card.addEventListener('click', () => {
+                  Array.from(optionsGrid.children).forEach(child => child.classList.remove('selected'));
+                  card.classList.add('selected');
+                  selections[question.id] = option.id;
+                  updateContinueState();
+                });
+                optionsGrid.appendChild(card);
+              });
+              qDiv.appendChild(optionsGrid);
+              container.appendChild(qDiv);
+            });
+          })
+          .catch(err => {
+            const container = document.getElementById('onboardingContainer');
+            window.AurethicaUI.showError(container, 'Error al cargar las preguntas. Por favor, recarga la página.');
+          });
+      }
       document.getElementById('continueBtn').addEventListener('click', () => {
         localStorage.setItem('onboarding', JSON.stringify(selections));
      window.location.href = 'gallery.html';
@@ -114,6 +165,7 @@
     
     <!-- Auréthica API Integration -->
     <script src="assets/js/api.js"></script>
+    <script src="assets/js/ui-utils.js"></script>
     <script>
       // API connectivity verification
       if (window.AurethicaAPI) {

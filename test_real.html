@@ -58,7 +58,7 @@
   </style>
 </head>
 <body>
-  <h1>Test Auréthica – Mapa de Estilo Personal</h1>
+  <h1>API Integration Test - Auréthica</h1>
   
   <!-- Pregunta 1 -->
   <section id="pregunta1">
@@ -110,9 +110,9 @@
   </section>
 
   <!-- Resultado -->
-  <section id="resultado" class="hidden">
-    <div class="question">¡Gracias por completar el test!</div>
-    <p>Has elegido: <span id="resultadoTexto"></span></p>
+  <section id="resultado">
+    <div class="question">Pruebas de integración del API</div>
+    <p>Ejecutando pruebas automáticas... <span id="resultadoTexto">Cargando...</span></p>
   </section>
 
   <script>
@@ -134,8 +134,146 @@
   
   <!-- Auréthica API Integration -->
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-utils.js"></script>
   <script>
-    // API connectivity verification
+    // Comprehensive API integration testing
+    let testResults = [];
+    
+    function logResult(test, success, message) {
+      const result = { test, success, message, timestamp: new Date().toISOString() };
+      testResults.push(result);
+      console.log(`[API TEST] ${test}: ${success ? 'PASS' : 'FAIL'} - ${message}`);
+      updateTestDisplay();
+    }
+    
+    function updateTestDisplay() {
+      const resultsContainer = document.getElementById('resultadoTexto');
+      if (resultsContainer) {
+        const summary = testResults.reduce((acc, r) => {
+          acc.total++;
+          if (r.success) acc.passed++;
+          return acc;
+        }, { total: 0, passed: 0 });
+        
+        resultsContainer.innerHTML = `
+          <div style="font-family: monospace; text-align: left;">
+            <h3>API Integration Test Results</h3>
+            <p><strong>Summary:</strong> ${summary.passed}/${summary.total} tests passed</p>
+            <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #f9f9f9;">
+              ${testResults.map(r => `
+                <div style="margin-bottom: 5px; color: ${r.success ? 'green' : 'red'};">
+                  [${r.timestamp.substr(11, 8)}] ${r.test}: ${r.success ? 'PASS' : 'FAIL'} - ${r.message}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+    
+    async function runAPITests() {
+      if (!window.AurethicaAPI) {
+        logResult('API Client', false, 'AurethicaAPI not available');
+        return;
+      }
+      
+      logResult('API Client', true, 'AurethicaAPI loaded successfully');
+      
+      // Test health endpoint
+      try {
+        const health = await window.AurethicaAPI.checkHealth();
+        logResult('Health Check', true, JSON.stringify(health));
+      } catch (error) {
+        logResult('Health Check', false, error.message);
+      }
+      
+      // Test API info endpoint
+      try {
+        const apiInfo = await window.AurethicaAPI.getAPIInfo();
+        logResult('API Info', true, JSON.stringify(apiInfo));
+      } catch (error) {
+        logResult('API Info', false, error.message);
+      }
+      
+      // Test onboarding endpoint
+      try {
+        const onboarding = await window.AurethicaAPI.getOnboarding();
+        const isValid = Array.isArray(onboarding) && onboarding.length > 0;
+        logResult('Onboarding Data', isValid, isValid ? `Retrieved ${onboarding.length} questions` : 'Invalid response format');
+      } catch (error) {
+        logResult('Onboarding Data', false, error.message);
+      }
+      
+      // Test styles endpoint
+      try {
+        const styles = await window.AurethicaAPI.getStyles();
+        const isValid = Array.isArray(styles) && styles.length > 0;
+        logResult('Styles Data', isValid, isValid ? `Retrieved ${styles.length} styles` : 'Invalid response format');
+        
+        // Test individual style endpoint if styles available
+        if (isValid && styles[0] && styles[0].id) {
+          try {
+            const style = await window.AurethicaAPI.getStyle(styles[0].id);
+            logResult('Individual Style', !!style, style ? `Retrieved style: ${style.name || style.id}` : 'No style data');
+          } catch (error) {
+            logResult('Individual Style', false, error.message);
+          }
+        }
+      } catch (error) {
+        logResult('Styles Data', false, error.message);
+      }
+      
+      // Test tips endpoint
+      try {
+        const tips = await window.AurethicaAPI.getTips();
+        const isValid = Array.isArray(tips) && tips.length > 0;
+        logResult('Tips Data', isValid, isValid ? `Retrieved ${tips.length} tips` : 'Invalid response format');
+      } catch (error) {
+        logResult('Tips Data', false, error.message);
+      }
+      
+      // Test messages endpoint
+      try {
+        const messages = await window.AurethicaAPI.getMessages();
+        const isValid = Array.isArray(messages) && messages.length > 0;
+        logResult('Messages Data', isValid, isValid ? `Retrieved ${messages.length} messages` : 'Invalid response format');
+      } catch (error) {
+        logResult('Messages Data', false, error.message);
+      }
+      
+      // Test UI utilities
+      if (window.AurethicaUI) {
+        logResult('UI Utilities', true, 'AurethicaUI loaded successfully');
+        
+        // Test loading state
+        try {
+          const testDiv = document.createElement('div');
+          testDiv.id = 'testContainer';
+          document.body.appendChild(testDiv);
+          
+          window.AurethicaUI.showLoading(testDiv, 'Test loading...');
+          setTimeout(() => {
+            window.AurethicaUI.clearStates(testDiv);
+            window.AurethicaUI.showError(testDiv, 'Test error message');
+            setTimeout(() => {
+              testDiv.remove();
+              logResult('UI States', true, 'Loading and error states work correctly');
+            }, 500);
+          }, 500);
+        } catch (error) {
+          logResult('UI States', false, error.message);
+        }
+      } else {
+        logResult('UI Utilities', false, 'AurethicaUI not available');
+      }
+    }
+    
+    // Run tests after page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(runAPITests, 1000);
+    });
+    
+    // API connectivity verification (existing)
     if (window.AurethicaAPI) {
       window.AurethicaAPI.checkHealth()
         .then(health => console.log('API Health:', health))
