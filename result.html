@@ -43,30 +43,92 @@
     <button class="restart-button" id="restartBtn">Reiniciar test</button>
   </div>
   <script>
-    function loadResult() {
+    // Load result from API combining styles, tips, and messages
+    async function loadResult() {
       const desired = JSON.parse(localStorage.getItem('desired') || '[]');
       const current = JSON.parse(localStorage.getItem('current') || '[]');
-      fetch('data/styles.json')
-        .then(res => res.json())
-        .then(data => {
+      const dominantContainer = document.getElementById('dominant');
+      const secondaryContainer = document.getElementById('secondary');
+      
+      if (window.AurethicaUI && window.AurethicaAPI) {
+        try {
+          // Show loading state
+          window.AurethicaUI.showLoading(dominantContainer, 'Cargando tu resultado...');
+          window.AurethicaUI.clearContainer(secondaryContainer);
+          
+          // Load all data from API
+          const [styles, tips, messages] = await Promise.all([
+            window.AurethicaAPI.getStyles(),
+            window.AurethicaAPI.getTips().catch(() => ({})), // Optional, don't fail if not available
+            window.AurethicaAPI.getMessages().catch(() => ({})) // Optional, don't fail if not available
+          ]);
+          
           const stylesById = {};
-          data.forEach(style => {
+          styles.forEach(style => {
             stylesById[style.id] = style;
           });
+          
           const dominantId = desired[0] || current[0];
           const secondaryId = desired[1] || '';
+          
+          // Clear loading states
+          window.AurethicaUI.clearContainer(dominantContainer);
+          
           if (dominantId && stylesById[dominantId]) {
             const s = stylesById[dominantId];
-            document.getElementById('dominant').innerHTML = '<h2>Estilo dominante: ' + s.name + '</h2><p>' + s.short + '</p>';
+            let dominantHTML = '<h2>Estilo dominante: ' + s.name + '</h2><p>' + s.short + '</p>';
+            
+            // Add tips if available
+            if (tips.general && tips.general.length > 0) {
+              dominantHTML += '<div style="margin-top: 1rem; padding: 1rem; background-color: #f8f9fa; border-radius: 4px;"><h4>Consejo:</h4><p>' + tips.general[0] + '</p></div>';
+            }
+            
+            dominantContainer.innerHTML = dominantHTML;
+          } else {
+            dominantContainer.innerHTML = '<h2>No se encontró información de estilo</h2>';
           }
+          
           if (secondaryId && stylesById[secondaryId]) {
             const s2 = stylesById[secondaryId];
-            document.getElementById('secondary').innerHTML = '<h2>Estilo secundario: ' + s2.name + '</h2><p>' + s2.short + '</p>';
+            secondaryContainer.innerHTML = '<h2>Estilo secundario: ' + s2.name + '</h2><p>' + s2.short + '</p>';
           }
-        })
-        .catch(err => {
-          document.getElementById('dominant').innerText = 'No se pudo cargar el resultado.';
-        });
+          
+          // Add messages if available
+          if (messages.completion) {
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = 'margin-top: 1rem; padding: 1rem; background-color: #e8f5e8; border-radius: 4px; text-align: center;';
+            messageDiv.innerHTML = '<p><strong>' + messages.completion + '</strong></p>';
+            document.querySelector('.result-container').appendChild(messageDiv);
+          }
+          
+        } catch (error) {
+          console.error('Error loading result:', error);
+          window.AurethicaUI.showError(dominantContainer, 'Error al cargar el resultado. Por favor, inténtalo de nuevo.');
+        }
+      } else {
+        // Fallback to original fetch if API helpers not available
+        fetch('data/styles.json')
+          .then(res => res.json())
+          .then(data => {
+            const stylesById = {};
+            data.forEach(style => {
+              stylesById[style.id] = style;
+            });
+            const dominantId = desired[0] || current[0];
+            const secondaryId = desired[1] || '';
+            if (dominantId && stylesById[dominantId]) {
+              const s = stylesById[dominantId];
+              document.getElementById('dominant').innerHTML = '<h2>Estilo dominante: ' + s.name + '</h2><p>' + s.short + '</p>';
+            }
+            if (secondaryId && stylesById[secondaryId]) {
+              const s2 = stylesById[secondaryId];
+              document.getElementById('secondary').innerHTML = '<h2>Estilo secundario: ' + s2.name + '</h2><p>' + s2.short + '</p>';
+            }
+          })
+          .catch(err => {
+            document.getElementById('dominant').innerText = 'No se pudo cargar el resultado.';
+          });
+      }
     }
     document.getElementById('restartBtn').addEventListener('click', () => {
       localStorage.removeItem('desired');
@@ -78,6 +140,7 @@
   
   <!-- Auréthica API Integration -->
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-helpers.js"></script>
   <script>
     // API connectivity verification
     if (window.AurethicaAPI) {

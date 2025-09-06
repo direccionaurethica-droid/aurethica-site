@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test Auréthica – Mapa de Estilo Personal</title>
+  <title>Test Auréthica API Integration – Real Tests</title>
   <style>
     body {
       font-family: "Inter", sans-serif;
@@ -18,129 +18,374 @@
       font-size: 2rem;
       color: #221f20;
     }
-    section {
+    .test-section {
       margin-bottom: 2rem;
-    }
-    .question {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    .options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .option {
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
       padding: 1rem;
-      width: calc(50% - 1rem);
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      transition: border-color 0.3s ease;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .option:hover {
-      border-color: #a4a2cc;
-    }
-    .option img {
-      max-width: 50px;
-      max-height: 50px;
-      margin-right: 0.75rem;
+    .test-button {
+      background: #b4a26e;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
       border-radius: 4px;
-      object-fit: cover;
+      cursor: pointer;
+      margin-right: 1rem;
+      margin-bottom: 0.5rem;
     }
-    .hidden {
-      display: none;
+    .test-button:hover {
+      background: #9a8a5a;
+    }
+    .test-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 4px;
+      min-height: 50px;
+    }
+    .success {
+      background-color: #e8f5e8;
+      border: 1px solid #4caf50;
+      color: #2e7d32;
+    }
+    .error {
+      background-color: #ffebee;
+      border: 1px solid #f44336;
+      color: #c62828;
+    }
+    .loading {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      color: #666;
+    }
+    .logs {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.9em;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .clear-logs {
+      background: #666;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+    .integration-test {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f0f8ff;
+      border: 1px solid #2196f3;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <h1>Test Auréthica – Mapa de Estilo Personal</h1>
+  <h1>Test Auréthica API Integration – Real Tests</h1>
   
-  <!-- Pregunta 1 -->
-  <section id="pregunta1">
-    <div class="question">¿Te gusta que tu ropa llame la atención? ¿La usas como forma de expresión?</div>
-    <div class="options">
-      <div class="option" id="resp1" onclick="mostrarPregunta2('1')">
-        <img src="https://source.unsplash.com/50x50/?fashion,expression" alt="Ropa como expresión" />
-        <span>Sí, la ropa es una forma de expresión</span>
-      </div>
-      <div class="option" id="resp2" onclick="mostrarPregunta2('2')">
-        <img src="https://source.unsplash.com/50x50/?minimal,fashion" alt="Ropa básica" />
-        <span>No, prefiero básicos</span>
-      </div>
-    </div>
-  </section>
+  <!-- API Health Test -->
+  <div class="test-section">
+    <h2>API Health Check</h2>
+    <button class="test-button" onclick="testAPIHealth()">Test Health Endpoint</button>
+    <div id="healthResult" class="test-result"></div>
+  </div>
 
-  <!-- Pregunta 2 para respuesta 1 -->
-  <section id="pregunta2_1" class="hidden">
-    <div class="question">¿Qué lugar ocupan los complementos en tu día a día?</div>
-    <div class="options">
-      <div class="option" onclick="seleccionarRespuesta('1A')">
-        <img src="https://source.unsplash.com/50x50/?statement,jewellery" alt="Complementos llamativos" />
-        <span>Complementos obligatorios, siempre elevan el look</span>
-      </div>
-      <div class="option" onclick="seleccionarRespuesta('1B')">
-        <img src="https://source.unsplash.com/50x50/?classic,accessories" alt="Complementos moderados" />
-        <span>Complementos importantes, en su medida</span>
-      </div>
-      <div class="option" onclick="seleccionarRespuesta('1C')">
-        <img src="https://source.unsplash.com/50x50/?minimal,accessories" alt="Complementos básicos" />
-        <span>Complementos básicos, siempre los mismos</span>
-      </div>
-    </div>
-  </section>
+  <!-- Individual Endpoint Tests -->
+  <div class="test-section">
+    <h2>Individual Endpoint Tests</h2>
+    <button class="test-button" onclick="testEndpoint('styles')">Test /api/styles</button>
+    <button class="test-button" onclick="testEndpoint('onboarding')">Test /api/onboarding</button>
+    <button class="test-button" onclick="testEndpoint('tips')">Test /api/tips</button>
+    <button class="test-button" onclick="testEndpoint('messages')">Test /api/messages</button>
+    <button class="test-button" onclick="testSpecificStyle()">Test /api/styles/:id</button>
+    <div id="endpointResult" class="test-result"></div>
+  </div>
 
-  <!-- Pregunta 2 para respuesta 2 -->
-  <section id="pregunta2_2" class="hidden">
-    <div class="question">¿Qué lugar ocupan los complementos en tu día a día?</div>
-    <div class="options">
-      <div class="option" onclick="seleccionarRespuesta('2A')">
-        <img src="https://source.unsplash.com/50x50/?classic,earrings" alt="Complementos clásicos" />
-        <span>Clásica: Pendientes obligatorios, los combino según la ocasión</span>
-      </div>
-      <div class="option" onclick="seleccionarRespuesta('2B')">
-        <img src="https://source.unsplash.com/50x50/?minimal,jewellery" alt="Complementos mínimos" />
-        <span>Lo mínimo: casi nada, solo lo que llevo para dormir</span>
-      </div>
-    </div>
-  </section>
+  <!-- Error Handling Tests -->
+  <div class="test-section">
+    <h2>Error Handling Tests</h2>
+    <button class="test-button" onclick="testNonExistentEndpoint()">Test 404 Error</button>
+    <button class="test-button" onclick="testNetworkError()">Test Network Error</button>
+    <div id="errorResult" class="test-result"></div>
+  </div>
 
-  <!-- Resultado -->
-  <section id="resultado" class="hidden">
-    <div class="question">¡Gracias por completar el test!</div>
-    <p>Has elegido: <span id="resultadoTexto"></span></p>
-  </section>
+  <!-- Integration Test -->
+  <div class="integration-test">
+    <h2>Full Integration Test</h2>
+    <p>This test simulates the full user flow through all pages:</p>
+    <button class="test-button" onclick="runFullIntegrationTest()">Run Full Integration Test</button>
+    <div id="integrationResult" class="test-result"></div>
+  </div>
 
+  <!-- Error Logs -->
+  <div class="test-section">
+    <h2>Error Logs <button class="clear-logs" onclick="clearLogs()">Clear Logs</button></h2>
+    <div id="errorLogs" class="logs"></div>
+  </div>
+
+  <!-- API Integration Scripts -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-helpers.js"></script>
+  
   <script>
-    function mostrarPregunta2(respuesta) {
-      document.getElementById('pregunta1').style.display = 'none';
-      if (respuesta === '1') {
-        document.getElementById('pregunta2_1').classList.remove('hidden');
-      } else {
-        document.getElementById('pregunta2_2').classList.remove('hidden');
+    // Error logging system
+    const errorLogs = [];
+    
+    function logError(context, error) {
+      const timestamp = new Date().toISOString();
+      const logEntry = {
+        timestamp,
+        context,
+        error: error.message || error.toString(),
+        stack: error.stack
+      };
+      errorLogs.push(logEntry);
+      updateLogsDisplay();
+      console.error(`[${timestamp}] ${context}:`, error);
+    }
+    
+    function updateLogsDisplay() {
+      const logsDiv = document.getElementById('errorLogs');
+      logsDiv.innerHTML = errorLogs.map(log => 
+        `<div>[${log.timestamp}] <strong>${log.context}</strong>: ${log.error}</div>`
+      ).join('');
+      logsDiv.scrollTop = logsDiv.scrollHeight;
+    }
+    
+    function clearLogs() {
+      errorLogs.length = 0;
+      document.getElementById('errorLogs').innerHTML = '';
+    }
+
+    // Test API Health
+    async function testAPIHealth() {
+      const resultDiv = document.getElementById('healthResult');
+      resultDiv.className = 'test-result loading';
+      resultDiv.innerHTML = 'Testing API health...';
+      
+      try {
+        if (!window.AurethicaAPI) {
+          throw new Error('AurethicaAPI not available');
+        }
+        
+        const health = await window.AurethicaAPI.checkHealth();
+        resultDiv.className = 'test-result success';
+        resultDiv.innerHTML = `✅ API Health OK: ${JSON.stringify(health, null, 2)}`;
+      } catch (error) {
+        logError('API Health Test', error);
+        resultDiv.className = 'test-result error';
+        resultDiv.innerHTML = `❌ API Health Failed: ${error.message}`;
       }
     }
-    function seleccionarRespuesta(opcion) {
-      document.getElementById('pregunta2_1').classList.add('hidden');
-      document.getElementById('pregunta2_2').classList.add('hidden');
-      document.getElementById('resultado').classList.remove('hidden');
-      document.getElementById('resultadoTexto').innerText = opcion;
+
+    // Test Individual Endpoints
+    async function testEndpoint(endpoint) {
+      const resultDiv = document.getElementById('endpointResult');
+      resultDiv.className = 'test-result loading';
+      resultDiv.innerHTML = `Testing /api/${endpoint}...`;
+      
+      try {
+        if (!window.AurethicaAPI) {
+          throw new Error('AurethicaAPI not available');
+        }
+        
+        let data;
+        switch(endpoint) {
+          case 'styles':
+            data = await window.AurethicaAPI.getStyles();
+            break;
+          case 'onboarding':
+            data = await window.AurethicaAPI.getOnboarding();
+            break;
+          case 'tips':
+            data = await window.AurethicaAPI.getTips();
+            break;
+          case 'messages':
+            data = await window.AurethicaAPI.getMessages();
+            break;
+          default:
+            throw new Error(`Unknown endpoint: ${endpoint}`);
+        }
+        
+        resultDiv.className = 'test-result success';
+        resultDiv.innerHTML = `✅ /api/${endpoint} OK: ${Array.isArray(data) ? data.length + ' items' : 'object'} loaded<br><pre style="max-height: 200px; overflow-y: auto; font-size: 0.8em;">${JSON.stringify(data, null, 2)}</pre>`;
+      } catch (error) {
+        logError(`Endpoint Test: /api/${endpoint}`, error);
+        resultDiv.className = 'test-result error';
+        resultDiv.innerHTML = `❌ /api/${endpoint} Failed: ${error.message}`;
+      }
     }
-  </script>
-  
-  <!-- Auréthica API Integration -->
-  <script src="assets/js/api.js"></script>
-  <script>
-    // API connectivity verification
-    if (window.AurethicaAPI) {
-      window.AurethicaAPI.checkHealth()
-        .then(health => console.log('API Health:', health))
-        .catch(err => console.warn('API not available:', err));
+
+    // Test specific style endpoint
+    async function testSpecificStyle() {
+      const resultDiv = document.getElementById('endpointResult');
+      resultDiv.className = 'test-result loading';
+      resultDiv.innerHTML = 'Testing /api/styles/:id...';
+      
+      try {
+        if (!window.AurethicaAPI) {
+          throw new Error('AurethicaAPI not available');
+        }
+        
+        // First get all styles to find a valid ID
+        const styles = await window.AurethicaAPI.getStyles();
+        if (!styles || styles.length === 0) {
+          throw new Error('No styles available to test with');
+        }
+        
+        const testId = styles[0].id;
+        const style = await window.AurethicaAPI.getStyle(testId);
+        
+        resultDiv.className = 'test-result success';
+        resultDiv.innerHTML = `✅ /api/styles/${testId} OK<br><pre style="max-height: 200px; overflow-y: auto; font-size: 0.8em;">${JSON.stringify(style, null, 2)}</pre>`;
+      } catch (error) {
+        logError('Specific Style Test', error);
+        resultDiv.className = 'test-result error';
+        resultDiv.innerHTML = `❌ /api/styles/:id Failed: ${error.message}`;
+      }
     }
+
+    // Test 404 Error
+    async function testNonExistentEndpoint() {
+      const resultDiv = document.getElementById('errorResult');
+      resultDiv.className = 'test-result loading';
+      resultDiv.innerHTML = 'Testing 404 error handling...';
+      
+      try {
+        if (!window.AurethicaAPI) {
+          throw new Error('AurethicaAPI not available');
+        }
+        
+        // This should fail
+        await window.AurethicaAPI.getStyle('nonexistent-style-id');
+        
+        // If we get here, the test failed
+        resultDiv.className = 'test-result error';
+        resultDiv.innerHTML = '❌ 404 Test Failed: Expected error but got success';
+      } catch (error) {
+        // This is expected
+        resultDiv.className = 'test-result success';
+        resultDiv.innerHTML = `✅ 404 Error Handled Correctly: ${error.message}`;
+      }
+    }
+
+    // Test Network Error (simulate by calling invalid URL)
+    async function testNetworkError() {
+      const resultDiv = document.getElementById('errorResult');
+      resultDiv.className = 'test-result loading';
+      resultDiv.innerHTML = 'Testing network error handling...';
+      
+      try {
+        // Try to fetch from an invalid URL to simulate network error
+        await fetch('http://nonexistent-domain-12345.com/api/test');
+        
+        resultDiv.className = 'test-result error';
+        resultDiv.innerHTML = '❌ Network Error Test Failed: Expected error but got success';
+      } catch (error) {
+        // This is expected
+        resultDiv.className = 'test-result success';
+        resultDiv.innerHTML = `✅ Network Error Handled Correctly: ${error.message}`;
+      }
+    }
+
+    // Full Integration Test
+    async function runFullIntegrationTest() {
+      const resultDiv = document.getElementById('integrationResult');
+      resultDiv.className = 'test-result loading';
+      resultDiv.innerHTML = 'Running full integration test...';
+      
+      const testResults = [];
+      
+      try {
+        if (!window.AurethicaAPI) {
+          throw new Error('AurethicaAPI not available');
+        }
+        
+        // Test 1: Health check
+        try {
+          await window.AurethicaAPI.checkHealth();
+          testResults.push('✅ Health check');
+        } catch (error) {
+          testResults.push('❌ Health check failed');
+          logError('Integration Test - Health', error);
+        }
+        
+        // Test 2: Load onboarding data
+        try {
+          const onboarding = await window.AurethicaAPI.getOnboarding();
+          testResults.push(`✅ Onboarding (${onboarding.length} questions)`);
+        } catch (error) {
+          testResults.push('❌ Onboarding failed');
+          logError('Integration Test - Onboarding', error);
+        }
+        
+        // Test 3: Load styles
+        try {
+          const styles = await window.AurethicaAPI.getStyles();
+          testResults.push(`✅ Styles (${styles.length} styles)`);
+        } catch (error) {
+          testResults.push('❌ Styles failed');
+          logError('Integration Test - Styles', error);
+        }
+        
+        // Test 4: Load tips
+        try {
+          const tips = await window.AurethicaAPI.getTips();
+          testResults.push('✅ Tips loaded');
+        } catch (error) {
+          testResults.push('❌ Tips failed');
+          logError('Integration Test - Tips', error);
+        }
+        
+        // Test 5: Load messages
+        try {
+          const messages = await window.AurethicaAPI.getMessages();
+          testResults.push('✅ Messages loaded');
+        } catch (error) {
+          testResults.push('❌ Messages failed');
+          logError('Integration Test - Messages', error);
+        }
+        
+        // Test 6: UI Helpers
+        if (window.AurethicaUI) {
+          testResults.push('✅ UI Helpers available');
+        } else {
+          testResults.push('❌ UI Helpers not available');
+        }
+        
+        const successCount = testResults.filter(r => r.startsWith('✅')).length;
+        const totalCount = testResults.length;
+        
+        if (successCount === totalCount) {
+          resultDiv.className = 'test-result success';
+          resultDiv.innerHTML = `🎉 Full Integration Test PASSED (${successCount}/${totalCount})<br><br>${testResults.join('<br>')}`;
+        } else {
+          resultDiv.className = 'test-result error';
+          resultDiv.innerHTML = `⚠️ Partial Integration Test (${successCount}/${totalCount})<br><br>${testResults.join('<br>')}`;
+        }
+        
+      } catch (error) {
+        logError('Integration Test - General', error);
+        resultDiv.className = 'test-result error';
+        resultDiv.innerHTML = `❌ Integration Test Failed: ${error.message}<br><br>${testResults.join('<br>')}`;
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Test page loaded. Ready for API testing.');
+      
+      // Auto-run health check on page load
+      setTimeout(testAPIHealth, 1000);
+    });
   </script>
 </body>
 </html>

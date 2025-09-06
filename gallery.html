@@ -99,20 +99,46 @@
       }
       updateSelectionInfo();
     }
-    fetch('data/styles.json')
-      .then(res => res.json())
-      .then(data => {
-        data.forEach(style => {
-          const card = document.createElement('div');
-          card.className = 'style-card';
-          card.innerHTML = '<img src="' + style.images[0] + '" alt="' + style.name + '"><div class="info"><h3>' + style.name + '</h3><p>' + style.short + '</p></div>';
-          card.addEventListener('click', () => toggleCard(card, style.id));
-          stylesGrid.appendChild(card);
-        });
-      })
-      .catch(err => {
-        stylesGrid.innerHTML = '<p>Error loading styles.</p>';
-      });
+    // Load styles from API
+    function loadStyles() {
+      const stylesGrid = document.getElementById('stylesGrid');
+      
+      if (window.AurethicaUI && window.AurethicaAPI) {
+        window.AurethicaUI.withLoadingAndError(
+          stylesGrid,
+          () => window.AurethicaAPI.getStyles(),
+          (data) => {
+            data.forEach(style => {
+              const card = document.createElement('div');
+              card.className = 'style-card';
+              card.innerHTML = '<img src="' + style.images[0] + '" alt="' + style.name + '"><div class="info"><h3>' + style.name + '</h3><p>' + style.short + '</p></div>';
+              card.addEventListener('click', () => toggleCard(card, style.id));
+              stylesGrid.appendChild(card);
+            });
+          },
+          'Error al cargar los estilos. Por favor, recarga la página.'
+        );
+      } else {
+        // Fallback to original fetch if API helpers not available
+        fetch('data/styles.json')
+          .then(res => res.json())
+          .then(data => {
+            data.forEach(style => {
+              const card = document.createElement('div');
+              card.className = 'style-card';
+              card.innerHTML = '<img src="' + style.images[0] + '" alt="' + style.name + '"><div class="info"><h3>' + style.name + '</h3><p>' + style.short + '</p></div>';
+              card.addEventListener('click', () => toggleCard(card, style.id));
+              stylesGrid.appendChild(card);
+            });
+          })
+          .catch(err => {
+            stylesGrid.innerHTML = '<p>Error loading styles.</p>';
+          });
+      }
+    }
+
+    // Load styles on page load
+    loadStyles();
     continueBtn.addEventListener('click', () => {
       const desired = Array.from(selectedStyles);
       localStorage.setItem('desired', JSON.stringify(desired));
@@ -123,6 +149,7 @@
   
   <!-- Auréthica API Integration -->
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui-helpers.js"></script>
   <script>
     // API connectivity verification
     if (window.AurethicaAPI) {
