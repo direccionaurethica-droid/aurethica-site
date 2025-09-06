@@ -137,8 +137,8 @@
       }
     }
 
-    // Load styles on page load
-    loadStyles();
+    // Load styles on page load - moved to after API scripts load
+    // loadStyles(); // This will be called after scripts load
     continueBtn.addEventListener('click', () => {
       const desired = Array.from(selectedStyles);
       localStorage.setItem('desired', JSON.stringify(desired));
@@ -157,6 +157,9 @@
         .then(health => console.log('API Health:', health))
         .catch(err => console.warn('API not available:', err));
     }
+    
+    // Load styles after API scripts are loaded
+    loadStyles();
   </script>
 </body>
 </html>

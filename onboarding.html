@@ -148,8 +148,8 @@
         }
       }
 
-      // Load onboarding questions on page load
-      loadOnboarding();
+      // Load onboarding questions on page load - moved to after API scripts load
+      // loadOnboarding(); // This will be called after scripts load
       document.getElementById('continueBtn').addEventListener('click', () => {
         localStorage.setItem('onboarding', JSON.stringify(selections));
      window.location.href = 'gallery.html';
@@ -166,6 +166,9 @@
           .then(health => console.log('API Health:', health))
           .catch(err => console.warn('API not available:', err));
       }
+      
+      // Load onboarding questions after API scripts are loaded
+      loadOnboarding();
     </script>
   </body>
 </html>

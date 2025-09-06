@@ -135,7 +135,7 @@
       localStorage.removeItem('current');
       window.location.href = 'gallery.html';
     });
-    loadResult();
+    // loadResult(); // This will be called after scripts load
   </script>
   
   <!-- Auréthica API Integration -->
@@ -148,6 +148,9 @@
         .then(health => console.log('API Health:', health))
         .catch(err => console.warn('API not available:', err));
     }
+    
+    // Load result after API scripts are loaded
+    loadResult();
   </script>
 </body>
 </html>
