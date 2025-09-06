@@ -22,29 +22,47 @@ El sitio se puede servir mediante GitHub Pages para un despliegue simple de arch
 El sitio está configurado para desplegarse en Vercel con soporte completo para el frontend estático y la API backend.
 
 #### URLs de Despliegue y Preview
-- **URL de Producción**: Se generará automáticamente al conectar el repositorio con Vercel
-- **URLs de Preview**: Cada PR genera automáticamente una URL de preview única
-- **URL de Desarrollo**: Disponible localmente en `http://localhost:3000` para el API
+- **URL de Producción**: `https://aurethica-site.vercel.app` (se generará automáticamente al conectar el repositorio)
+- **URLs de Preview**: Cada PR genera automáticamente una URL de preview única con formato `https://aurethica-site-git-[branch-name]-[team].vercel.app`
+- **URL de Desarrollo Local**: 
+  - Frontend: `http://localhost:3000` (servidor estático)
+  - API: `http://localhost:3001` (servidor Express)
+
+> **Estado del Despliegue**: ✅ Configurado y listo para desplegar
 
 #### Configuración del Proyecto Vercel
 1. **Crear proyecto en Vercel**:
    - Ve a [vercel.com](https://vercel.com) y conecta tu cuenta de GitHub
    - Importa este repositorio como un nuevo proyecto
+   - Selecciona **Framework**: `Other` (sitio estático)
    - Vercel detectará automáticamente la configuración desde `vercel.json`
 
-2. **Configurar dominio personalizado** (opcional):
+2. **Configuración de Build**:
+   - **Build Command**: `npm install` (configurado automáticamente)
+   - **Output Directory**: `.` (raíz del proyecto)
+   - **Install Command**: `npm install` (configurado automáticamente)
+
+3. **Configurar dominio personalizado** (opcional):
    - En el dashboard del proyecto, ve a Settings > Domains
    - Añade tu dominio personalizado
    - Configura los registros DNS según las instrucciones de Vercel
 
-3. **Variables de entorno** (si es necesario en el futuro):
+4. **Variables de entorno** (si es necesario en el futuro):
    - En Settings > Environment Variables
    - Añade las variables necesarias para producción, preview y desarrollo
 
+5. **Activar PR Previews**:
+   - Los previews de PR están activados automáticamente
+   - Cada PR generará una URL única de preview
+   - Los comentarios automáticos aparecerán en las PRs con las URLs de preview
+
 La configuración en `vercel.json` incluye:
+- **Framework**: Static site (configurado para detección automática)
 - **Clean URLs**: URLs sin extensión `.html` (ej: `/test` en lugar de `/test.html`)
 - **Cache-Control**: Headers optimizados para assets estáticos (1 año) y HTML (1 hora)
-- **API Routes**: El backend en `/api` puede requerir adaptación para funciones serverless de Vercel
+- **Security Headers**: X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
+- **GitHub Integration**: Auto-alias y cancelación automática de jobs para PR previews
+- **Build Configuration**: Comando de instalación y directorio de salida optimizados
 
 > **Nota**: El servidor Express actual está diseñado para ejecución tradicional. Para despliegue en Vercel, considera convertir las rutas del API a funciones serverless individuales en el directorio `/api` si experimentas problemas con el servidor Express completo.
 

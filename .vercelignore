@@ -1,0 +1,40 @@
+# Dependencies
+node_modules
+npm-debug.log*
+.npm
+
+# Development and build files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API directory (deployed separately)
+api/
+
+# Documentation
+docs/
+README.md
+
+# Development tools
+package-lock.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
