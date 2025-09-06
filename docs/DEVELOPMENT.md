@@ -50,6 +50,8 @@ aurethica-site/
    This runs both the frontend and API servers concurrently:
    - Frontend: http://localhost:3000 (static file server)
    - API: http://localhost:3001 (Express server)
+   
+   **Note:** If using Vite or other development servers, the frontend may run on port 5173. The API CORS configuration supports both ports.
 
 ### Individual Commands
 
@@ -93,7 +95,10 @@ The API client automatically detects the environment:
 The API server uses environment-based CORS configuration:
 - `CORS_ORIGIN` environment variable controls allowed origins
 - Multiple origins can be separated by commas
-- Default: `http://localhost:3000` for development
+- Default for development: `http://localhost:3000,http://localhost:5173`
+  - Port 3000: Static file server
+  - Port 5173: Vite development server
+- The middleware properly handles preflight OPTIONS requests
 
 ## Available API Endpoints
 
