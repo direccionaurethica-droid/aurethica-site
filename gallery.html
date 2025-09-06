@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Galería de Estilos - Auréthica</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de Estilos | Auréthica</title>
+  <meta name="description" content="Explora nuestra galería de estilos únicos y selecciona los que más resonan contigo para completar tu diagnóstico personalizado." />
   <link rel="stylesheet" href="style.css">
   <style>
     .gallery-container {
@@ -69,8 +71,15 @@
   </style>
 </head>
 <body>
-  <div class="gallery-container">
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  
+  <header>
     <h1>Selecciona tus estilos deseados</h1>
+  </header>
+  
+  <main id="main-content">
+    <div class="gallery-container">
     <p>Elige hasta 6 estilos que te inspiran.</p>
     <div class="selection-info" id="selectionInfo">0 de 6 seleccionados</div>
     <div class="styles-grid" id="stylesGrid"></div>
@@ -131,5 +140,6 @@
         .catch(err => console.warn('API not available:', err));
     }
   </script>
+  </main>
 </body>
 </html>

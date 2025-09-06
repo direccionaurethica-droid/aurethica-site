@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auréthica – Onboarding</title>
+    <title>Bienvenida al Diagnóstico | Auréthica</title>
+    <meta name="description" content="Comienza tu proceso de diagnóstico de estilo personal con Auréthica. Responde a nuestras preguntas para descubrir tu estilo auténtico." />
     <link rel="stylesheet" href="style.css">
     <style>
       .onboarding-container {
@@ -57,17 +58,23 @@
     </style>
   </head>
   <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
     <header class="hero" style="padding: 2rem 1rem; background: linear-gradient(135deg, #d9c8f4, #e3f0ff);">
       <div class="hero-content">
         <h1>Bienvenida a Auréthica</h1>
         <p class="subtitle">Empecemos con un par de preguntas sobre tu expresión y accesorios</p>
       </div>
     </header>
-    <div class="onboarding-container" id="onboardingContainer">
-    </div>
-    <div style="text-align: center;">
-      <button id="continueBtn" disabled>Continuar</button>
-    </div>
+    
+    <main id="main-content">
+      <div class="onboarding-container" id="onboardingContainer">
+      </div>
+      <div style="text-align: center;">
+        <button id="continueBtn" disabled>Continuar</button>
+      </div>
+    </main>
     <script>
       const selections = {};
       function updateContinueState() {
