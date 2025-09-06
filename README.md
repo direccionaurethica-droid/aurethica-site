@@ -54,17 +54,25 @@ Auréthica – “Elevamos la estética a ética”.
 
 ## API / Backend
 
-Este repositorio también contiene un servidor de API para el test. La carpeta `api/` incluye:
+Este repositorio contiene el servidor de API oficial de Auréthica que **reemplaza completamente** el legacy `hairlab-data-service`. La carpeta `api/` incluye:
 
 - `server.js`: servidor Node/Express que sirve los datos del test.
 - `package.json`: dependencias (`express`, `cors`) y scripts de inicio.
 - `data/`: ficheros JSON con estilos (`styles.json`), preguntas iniciales (`onboarding.json`), mensajes puente (`messages.json`) y sugerencias (`tips.json`).
 
+### Migración desde hairlab-data-service
+
+🎉 **Migración completada** - Este API es un superconjunto del legacy `hairlab-data-service` con funcionalidad mejorada y endpoints adicionales. Ver [documentación completa de migración](docs/MIGRATION_HAIRLAB.md).
+
 ### Endpoints
 
-- `GET /styles`: devuelve la lista de estilos disponibles con sus metadatos.
-- `GET /styles/:id`: devuelve los detalles de un estilo específico por `id`.
-- `GET /health`: endpoint de salud.
+- `GET /health`: endpoint de salud con timestamp.
+- `GET /api`: información del API y endpoints disponibles.
+- `GET /api/styles`: devuelve la lista de estilos disponibles con sus metadatos.
+- `GET /api/styles/:id`: devuelve los detalles de un estilo específico por `id`.
+- `GET /api/tips`: consejos de cuidado capilar por estilo.
+- `GET /api/messages`: mensajes de transición entre estilos.
+- `GET /api/onboarding`: preguntas del cuestionario inicial.
 
 ### Cómo ejecutar el backend
 
@@ -73,6 +81,8 @@ Para arrancar el servidor de datos localmente:
 1. Navega a la carpeta `api/`: `cd api`
 2. Instala las dependencias: `npm install`
 3. Inicia el servidor: `node server.js`
-4. El servidor quedará disponible en `http://localhost:3000`.
+4. El servidor quedará disponible en `http://localhost:3001`.
+
+> **Nota**: El puerto por defecto es `3001` (no `3000` como el legacy hairlab-data-service) para evitar conflictos.
 
 ---

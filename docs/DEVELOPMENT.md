@@ -2,6 +2,8 @@
 
 This document provides instructions for setting up and developing the Auréthica website locally.
 
+> 🎉 **Migration Complete**: The API in this repository has fully replaced the legacy `hairlab-data-service`. See [Migration Documentation](MIGRATION_HAIRLAB.md) for details.
+
 ## Project Structure
 
 ```
