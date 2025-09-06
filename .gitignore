@@ -25,6 +25,16 @@ logs
 tmp/
 temp/
 
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Image generation scripts (temporary)
+**/generate_placeholders.py
+update_styles.py
+update_gallery.py
+
 # IDE/Editor files
 .vscode/
 .idea/

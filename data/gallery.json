@@ -2,109 +2,109 @@
   {
     "id": "fashionista",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?fashion-woman-street-style&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?fashion-woman-street-style&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?fashion-woman-street-style&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?fashion-woman-street-style&sig=4"
+      "assets/images/styles/fashionista-1.jpg",
+      "assets/images/styles/fashionista-2.jpg",
+      "assets/images/styles/fashionista-3.jpg",
+      "assets/images/styles/fashionista-4.jpg"
     ]
   },
   {
     "id": "diva-escenica",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?glamour-stage-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?glamour-stage-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?glamour-stage-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?glamour-stage-woman&sig=4"
+      "assets/images/styles/diva-escenica-1.jpg",
+      "assets/images/styles/diva-escenica-2.jpg",
+      "assets/images/styles/diva-escenica-3.jpg",
+      "assets/images/styles/diva-escenica-4.jpg"
     ]
   },
   {
     "id": "creadora-tendencia",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?trendsetter-woman-fashion&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?trendsetter-woman-fashion&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?trendsetter-woman-fashion&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?trendsetter-woman-fashion&sig=4"
+      "assets/images/styles/creadora-tendencia-1.jpg",
+      "assets/images/styles/creadora-tendencia-2.jpg",
+      "assets/images/styles/creadora-tendencia-3.jpg",
+      "assets/images/styles/creadora-tendencia-4.jpg"
     ]
   },
   {
     "id": "ejecutiva",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?businesswoman-fashion-style&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?businesswoman-fashion-style&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?businesswoman-fashion-style&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?businesswoman-fashion-style&sig=4"
+      "assets/images/styles/ejecutiva-1.jpg",
+      "assets/images/styles/ejecutiva-2.jpg",
+      "assets/images/styles/ejecutiva-3.jpg",
+      "assets/images/styles/ejecutiva-4.jpg"
     ]
   },
   {
     "id": "urbanita",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?urban-style-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?urban-style-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?urban-style-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?urban-style-woman&sig=4"
+      "assets/images/styles/urbanita-1.jpg",
+      "assets/images/styles/urbanita-2.jpg",
+      "assets/images/styles/urbanita-3.jpg",
+      "assets/images/styles/urbanita-4.jpg"
     ]
   },
   {
     "id": "clasica-atemporal",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?timeless-fashion-woman-classic&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?timeless-fashion-woman-classic&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?timeless-fashion-woman-classic&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?timeless-fashion-woman-classic&sig=4"
+      "assets/images/styles/clasica-atemporal-1.jpg",
+      "assets/images/styles/clasica-atemporal-2.jpg",
+      "assets/images/styles/clasica-atemporal-3.jpg",
+      "assets/images/styles/clasica-atemporal-4.jpg"
     ]
   },
   {
     "id": "minimalista-elegante",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?minimalist-fashion-elegant-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?minimalist-fashion-elegant-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?minimalist-fashion-elegant-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?minimalist-fashion-elegant-woman&sig=4"
+      "assets/images/styles/minimalista-elegante-1.jpg",
+      "assets/images/styles/minimalista-elegante-2.jpg",
+      "assets/images/styles/minimalista-elegante-3.jpg",
+      "assets/images/styles/minimalista-elegante-4.jpg"
     ]
   },
   {
     "id": "ama-casa-moderna",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?modern-home-fashion-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?modern-home-fashion-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?modern-home-fashion-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?modern-home-fashion-woman&sig=4"
+      "assets/images/styles/ama-casa-moderna-1.jpg",
+      "assets/images/styles/ama-casa-moderna-2.jpg",
+      "assets/images/styles/ama-casa-moderna-3.jpg",
+      "assets/images/styles/ama-casa-moderna-4.jpg"
     ]
   },
   {
     "id": "comoda-practica",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?comfortable-practical-fashion-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?comfortable-practical-fashion-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?comfortable-practical-fashion-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?comfortable-practical-fashion-woman&sig=4"
+      "assets/images/styles/comoda-practica-1.jpg",
+      "assets/images/styles/comoda-practica-2.jpg",
+      "assets/images/styles/comoda-practica-3.jpg",
+      "assets/images/styles/comoda-practica-4.jpg"
     ]
   },
   {
     "id": "deportista",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?sporty-woman-fashion&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?sporty-woman-fashion&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?sporty-woman-fashion&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?sporty-woman-fashion&sig=4"
+      "assets/images/styles/deportista-1.jpg",
+      "assets/images/styles/deportista-2.jpg",
+      "assets/images/styles/deportista-3.jpg",
+      "assets/images/styles/deportista-4.jpg"
     ]
   },
   {
     "id": "natural-bohemia",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?bohemian-fashion-natural-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?bohemian-fashion-natural-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?bohemian-fashion-natural-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?bohemian-fashion-natural-woman&sig=4"
+      "assets/images/styles/natural-bohemia-1.jpg",
+      "assets/images/styles/natural-bohemia-2.jpg",
+      "assets/images/styles/natural-bohemia-3.jpg",
+      "assets/images/styles/natural-bohemia-4.jpg"
     ]
   },
   {
     "id": "en-busqueda",
     "images": [
-      "https://source.unsplash.com/featured/1200x1600/?transitional-fashion-woman&sig=1",
-      "https://source.unsplash.com/featured/1200x1600/?transitional-fashion-woman&sig=2",
-      "https://source.unsplash.com/featured/1200x1600/?transitional-fashion-woman&sig=3",
-      "https://source.unsplash.com/featured/1200x1600/?transitional-fashion-woman&sig=4"
+      "assets/images/styles/en-busqueda-1.jpg",
+      "assets/images/styles/en-busqueda-2.jpg",
+      "assets/images/styles/en-busqueda-3.jpg",
+      "assets/images/styles/en-busqueda-4.jpg"
     ]
   }
 ]
