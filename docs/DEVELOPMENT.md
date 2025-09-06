@@ -29,6 +29,8 @@ aurethica-site/
 
 ### Quick Start
 
+Cualquiera puede levantar el entorno de desarrollo con estos tres comandos:
+
 1. **Install dependencies:**
    ```bash
    npm run install:all
@@ -50,6 +52,12 @@ aurethica-site/
    This runs both the frontend and API servers concurrently:
    - Frontend: http://localhost:3000 (static file server)
    - API: http://localhost:3001 (Express server)
+
+### Verification
+
+To verify everything is working correctly:
+- Visit frontend: http://localhost:3000
+- Check API health: http://localhost:3001/health (should return JSON with status "OK")
 
 ### Individual Commands
 
@@ -188,11 +196,102 @@ CORS_ORIGIN=https://your-frontend.vercel.app,https://your-custom-domain.com
 3. Check browser console for error messages
 4. Test API directly: http://localhost:3001/health
 
+### Port Conflicts
+
+If you encounter "port already in use" errors:
+
+**For port 3000 (frontend):**
+```bash
+# Find and kill process using port 3000
+lsof -ti:3000 | xargs kill -9
+```
+
+**For port 3001 (API):**
+```bash
+# Find and kill process using port 3001
+lsof -ti:3001 | xargs kill -9
+```
+
+**Alternative: Use different ports**
+```bash
+# Start frontend on different port
+npx http-server . -p 3002 -c-1
+
+# Or modify api/.env to use different API port
+PORT=3002
+```
+
+### CORS Issues
+
+If you see CORS errors in browser console:
+
+1. **Verify environment file exists:**
+   ```bash
+   ls -la api/.env
+   ```
+
+2. **Check CORS configuration:**
+   ```bash
+   cat api/.env | grep CORS_ORIGIN
+   ```
+   Should show: `CORS_ORIGIN=http://localhost:3000`
+
+3. **Restart API server:**
+   ```bash
+   # Stop current process and restart
+   npm run dev:api
+   ```
+
+4. **Clear browser cache and hard reload (Ctrl+Shift+R)**
+
+### Environment Variables Issues
+
+**Missing .env file:**
+```bash
+# Check if file exists
+ls -la api/.env
+
+# If missing, copy from template
+cp api/.env.example api/.env
+```
+
+**Incorrect environment variables:**
+```bash
+# Compare with template
+diff api/.env.example api/.env
+
+# Reset to defaults if needed
+cp api/.env.example api/.env
+```
+
 ### Build Issues
 
 1. Ensure Node.js version is 16.0.0 or higher
 2. Clear npm cache: `npm cache clean --force`
-3. Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
+3. Delete `node_modules` and reinstall: `rm -rf node_modules api/node_modules && npm run install:all`
+
+### Health Check Fails
+
+If http://localhost:3001/health returns an error:
+
+1. **Check server logs:** Look at the terminal where `npm run dev` is running
+2. **Verify port availability:** `netstat -tulpn | grep 3001`
+3. **Test with curl:** `curl http://localhost:3001/health`
+4. **Check firewall settings:** Ensure localhost connections are allowed
+
+### Common Error Messages
+
+**"EADDRINUSE" error:**
+- Port is already in use. Follow port conflict resolution above.
+
+**"Cannot GET /health" error:**
+- API server is not running. Start with `npm run dev:api`
+
+**CORS policy error in browser:**
+- Follow CORS troubleshooting steps above.
+
+**"Module not found" errors:**
+- Dependencies not installed. Run `npm run install:all`
 
 ## Next Steps Checklist
 
