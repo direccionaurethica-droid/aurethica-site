@@ -5,7 +5,6 @@ Este repositorio contiene la interfaz web estática del test y landing de Aurét
 ## Estructura
 
 - `index.html`: Portada principal con hero banner, llamada a la acción y enlaces básicos.
-- `test.html`: Página del test de estilos (prototipo).
 - `style.css`: Hoja de estilos con tipografía, colores y layout.
 - `legal.html`: Aviso legal y privacidad.
 
@@ -42,7 +41,7 @@ El sitio está configurado para desplegarse en Vercel con soporte completo para 
    - Añade las variables necesarias para producción, preview y desarrollo
 
 La configuración en `vercel.json` incluye:
-- **Clean URLs**: URLs sin extensión `.html` (ej: `/test` en lugar de `/test.html`)
+- **Clean URLs**: URLs sin extensión `.html` (ej: `/gallery` en lugar de `/gallery.html`)
 - **Cache-Control**: Headers optimizados para assets estáticos (1 año) y HTML (1 hora)
 - **API Routes**: El backend en `/api` puede requerir adaptación para funciones serverless de Vercel
 
