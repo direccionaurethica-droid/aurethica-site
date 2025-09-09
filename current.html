@@ -100,8 +100,7 @@
       }
       updateSelectionInfo();
     }
-    fetch('data/styles.json')
-      .then(res => res.json())
+    window.AurethicaAPI.getStyles()
       .then(data => {
         data.forEach(style => {
           const card = document.createElement('div');

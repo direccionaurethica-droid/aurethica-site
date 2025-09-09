@@ -78,8 +78,7 @@
           btn.disabled = true;
         }
       }
-      fetch('data/onboarding.json')
-        .then(resp => resp.json())
+      window.AurethicaAPI.getOnboarding()
         .then(data => {
           const container = document.getElementById('onboardingContainer');
           data.forEach(question => {
@@ -105,6 +104,9 @@
             qDiv.appendChild(optionsGrid);
             container.appendChild(qDiv);
           });
+        })
+        .catch(err => {
+          console.error('Error loading onboarding data:', err);
         });
       document.getElementById('continueBtn').addEventListener('click', () => {
         localStorage.setItem('onboarding', JSON.stringify(selections));

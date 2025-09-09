@@ -46,8 +46,7 @@
     function loadResult() {
       const desired = JSON.parse(localStorage.getItem('desired') || '[]');
       const current = JSON.parse(localStorage.getItem('current') || '[]');
-      fetch('data/styles.json')
-        .then(res => res.json())
+      window.AurethicaAPI.getStyles()
         .then(data => {
           const stylesById = {};
           data.forEach(style => {
