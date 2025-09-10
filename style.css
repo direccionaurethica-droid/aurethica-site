@@ -145,3 +145,78 @@ h1, h2, h3 {
   color: #4a2cc2;
   font-weight: 500;
 }
+
+/* Shared styles for style selection pages */
+.gallery-container,
+.current-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.styles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.style-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.style-card.selected {
+  box-shadow: 0 0 0 3px #b4a26e;
+  transform: translateY(-5px);
+}
+
+.style-card img {
+  width: 100%;
+  display: block;
+  height: 200px;
+  object-fit: cover;
+}
+
+.style-card .info {
+  padding: 10px;
+}
+
+.style-card .info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2em;
+}
+
+.style-card .info p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.selection-info {
+  margin: 20px 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.action-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.action-buttons button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 6px;
+  background-color: #a48a5e;
+  color: #fff;
+  cursor: pointer;
+}
+
+.action-buttons button:disabled {
+  background-color: #ccc;
+  cursor: default;
+}

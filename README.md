@@ -5,7 +5,6 @@ Este repositorio contiene la interfaz web estática del test y landing de Aurét
 ## Estructura
 
 - `index.html`: Portada principal con hero banner, llamada a la acción y enlaces básicos.
-- `test.html`: Página del test de estilos (prototipo).
 - `style.css`: Hoja de estilos con tipografía, colores y layout.
 - `legal.html`: Aviso legal y privacidad.
 
@@ -24,7 +23,7 @@ El sitio está configurado para desplegarse en Vercel con soporte completo para 
 #### URLs de Despliegue y Preview
 - **URL de Producción**: Se generará automáticamente al conectar el repositorio con Vercel
 - **URLs de Preview**: Cada PR genera automáticamente una URL de preview única
-- **URL de Desarrollo**: Disponible localmente en `http://localhost:3000` para el API
+- **URL de Desarrollo**: Frontend en `http://localhost:3000` y API en `http://localhost:3001`
 
 #### Configuración del Proyecto Vercel
 1. **Crear proyecto en Vercel**:
@@ -42,7 +41,7 @@ El sitio está configurado para desplegarse en Vercel con soporte completo para 
    - Añade las variables necesarias para producción, preview y desarrollo
 
 La configuración en `vercel.json` incluye:
-- **Clean URLs**: URLs sin extensión `.html` (ej: `/test` en lugar de `/test.html`)
+- **Clean URLs**: URLs sin extensión `.html` (ej: `/gallery` en lugar de `/gallery.html`)
 - **Cache-Control**: Headers optimizados para assets estáticos (1 año) y HTML (1 hora)
 - **API Routes**: El backend en `/api` puede requerir adaptación para funciones serverless de Vercel
 
@@ -58,7 +57,7 @@ Este repositorio también contiene un servidor de API para el test. La carpeta `
 
 - `server.js`: servidor Node/Express que sirve los datos del test.
 - `package.json`: dependencias (`express`, `cors`) y scripts de inicio.
-- `data/`: ficheros JSON con estilos (`styles.json`), preguntas iniciales (`onboarding.json`), mensajes puente (`messages.json`) y sugerencias (`tips.json`).
+- `data/`: ficheros JSON con estilos (`styles.json`), preguntas iniciales (`onboarding.json`), mensajes puente (`messages.json`) y sugerencias (`tips.json`) dentro de `api/`.
 
 ### Endpoints
 
@@ -72,7 +71,8 @@ Para arrancar el servidor de datos localmente:
 
 1. Navega a la carpeta `api/`: `cd api`
 2. Instala las dependencias: `npm install`
-3. Inicia el servidor: `node server.js`
-4. El servidor quedará disponible en `http://localhost:3000`.
+3. (Opcional) Copia el archivo de entorno: `cp .env.example .env`
+4. Inicia el servidor: `node server.js`
+5. El servidor quedará disponible en `http://localhost:3001`.
 
 ---

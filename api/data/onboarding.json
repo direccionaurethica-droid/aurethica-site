@@ -3,18 +3,42 @@
     "id": "new-look",
     "question": "\u00bfCu\u00e1l es tu principal motivaci\u00f3n al cambiar de look?",
     "options": [
-      "Explorar un estilo nuevo",
-      "Definir mi propio estilo",
-      "Salir de la rutina"
+      {
+        "id": "explorar-estilo",
+        "text": "Explorar un estilo nuevo",
+        "image": "https://via.placeholder.com/150?text=Nuevo"
+      },
+      {
+        "id": "definir-estilo",
+        "text": "Definir mi propio estilo",
+        "image": "https://via.placeholder.com/150?text=Propio"
+      },
+      {
+        "id": "salir-rutina",
+        "text": "Salir de la rutina",
+        "image": "https://via.placeholder.com/150?text=Rutina"
+      }
     ]
   },
   {
     "id": "experiment-frequency",
     "question": "\u00bfCon qu\u00e9 frecuencia experimentas con tu peinado?",
     "options": [
-      "Casi nunca",
-      "Ocasionalmente",
-      "Frecuentemente"
+      {
+        "id": "casi-nunca",
+        "text": "Casi nunca",
+        "image": "https://via.placeholder.com/150?text=Nunca"
+      },
+      {
+        "id": "ocasionalmente",
+        "text": "Ocasionalmente",
+        "image": "https://via.placeholder.com/150?text=Ocasional"
+      },
+      {
+        "id": "frecuentemente",
+        "text": "Frecuentemente",
+        "image": "https://via.placeholder.com/150?text=Frecuente"
+      }
     ]
   }
 ]

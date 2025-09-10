@@ -4,73 +4,9 @@
   <meta charset="UTF-8">
   <title>Selecciona tu estilo actual - Auréthica</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Use the same CSS as gallery for consistency */
-    .current-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .styles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-    .style-card {
-      border: 1px solid #eee;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .style-card.selected {
-      box-shadow: 0 0 0 3px #b4a26e;
-      transform: translateY(-5px);
-    }
-    .style-card img {
-      width: 100%;
-      display: block;
-      height: 200px;
-      object-fit: cover;
-    }
-    .style-card .info {
-      padding: 10px;
-    }
-    .style-card .info h3 {
-      margin: 0 0 5px 0;
-      font-size: 1.2em;
-    }
-    .style-card .info p {
-      margin: 0;
-      font-size: 0.9em;
-      color: #555;
-    }
-    .selection-info {
-      margin: 20px 0;
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-    .action-buttons {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .action-buttons button {
-      padding: 10px 20px;
-      font-size: 1em;
-      border: none;
-      border-radius: 6px;
-      background-color: #a48a5e;
-      color: #fff;
-      cursor: pointer;
-    }
-    .action-buttons button:disabled {
-      background-color: #ccc;
-      cursor: default;
-    }
-  </style>
 </head>
 <body>
-  <div class="current-container">
+    <div class="current-container">
     <h1>Selecciona tu estilo actual</h1>
     <p>Elige 1 o 2 estilos con los que te identificas hoy.</p>
     <div class="selection-info" id="selectionInfo">0 de 2 seleccionados</div>
@@ -79,6 +15,9 @@
       <button id="continueBtn" disabled>Ver resultado</button>
     </div>
   </div>
+
+  <!-- Auréthica API Integration -->
+  <script src="assets/js/api.js"></script>
   <script>
     const selectionLimit = 2;
     const selectedStyles = new Set();
@@ -100,8 +39,7 @@
       }
       updateSelectionInfo();
     }
-    fetch('data/styles.json')
-      .then(res => res.json())
+    window.AurethicaAPI.getStyles()
       .then(data => {
         data.forEach(style => {
           const card = document.createElement('div');
@@ -111,7 +49,7 @@
           stylesGrid.appendChild(card);
         });
       })
-      .catch(err => {
+      .catch(() => {
         stylesGrid.innerHTML = '<p>Error loading styles.</p>';
       });
     continueBtn.addEventListener('click', () => {
@@ -121,9 +59,6 @@
     });
     updateSelectionInfo();
   </script>
-  
-  <!-- Auréthica API Integration -->
-  <script src="assets/js/api.js"></script>
   <script>
     // API connectivity verification
     if (window.AurethicaAPI) {

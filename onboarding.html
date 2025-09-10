@@ -68,18 +68,17 @@
     <div style="text-align: center;">
       <button id="continueBtn" disabled>Continuar</button>
     </div>
+
+    <!-- Auréthica API Integration -->
+    <script src="assets/js/api.js"></script>
     <script>
       const selections = {};
       function updateContinueState() {
         const btn = document.getElementById('continueBtn');
-        if (Object.keys(selections).length === 2) {
-          btn.disabled = false;
-        } else {
-          btn.disabled = true;
-        }
+        btn.disabled = Object.keys(selections).length !== 2;
       }
-      fetch('data/onboarding.json')
-        .then(resp => resp.json())
+
+      window.AurethicaAPI.getOnboarding()
         .then(data => {
           const container = document.getElementById('onboardingContainer');
           data.forEach(question => {
@@ -105,15 +104,17 @@
             qDiv.appendChild(optionsGrid);
             container.appendChild(qDiv);
           });
+        })
+        .catch(() => {
+          const container = document.getElementById('onboardingContainer');
+          container.innerHTML = '<p>Error loading questions.</p>';
         });
+
       document.getElementById('continueBtn').addEventListener('click', () => {
         localStorage.setItem('onboarding', JSON.stringify(selections));
-     window.location.href = 'gallery.html';
+        window.location.href = 'gallery.html';
       });
     </script>
-    
-    <!-- Auréthica API Integration -->
-    <script src="assets/js/api.js"></script>
     <script>
       // API connectivity verification
       if (window.AurethicaAPI) {
