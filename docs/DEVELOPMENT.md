@@ -1,6 +1,6 @@
-# Auréthica Development Guide
+# Auréthica API Development Guide
 
-This document provides instructions for setting up and developing the Auréthica website locally.
+This document provides instructions for setting up and developing the Auréthica API backend locally.
 
 ## Project Structure
 
@@ -11,13 +11,8 @@ aurethica-site/
 │   ├── server.js        # Express server
 │   ├── package.json     # API dependencies
 │   └── .env.example     # Environment variables template
-├── assets/              # Frontend assets
-│   └── js/
-│       └── api.js       # API client library
 ├── docs/                # Documentation
-├── *.html               # Frontend pages
-├── style.css            # Styles
-└── package.json         # Root development dependencies
+└── package.json         # Root package management
 ```
 
 ## Local Development Setup
@@ -31,9 +26,9 @@ aurethica-site/
 
 1. **Install dependencies:**
    ```bash
-   npm run install:all
+   npm run install:api
    ```
-   This installs both root and API dependencies.
+   This installs API dependencies.
 
 2. **Set up environment variables:**
    ```bash
@@ -42,63 +37,16 @@ aurethica-site/
    
    Edit `api/.env` if needed. Default values work for local development.
 
-3. **Start development servers:**
+3. **Start the API server:**
    ```bash
-   npm run dev
+   npm start
    ```
    
-   This runs both the frontend and API servers concurrently:
-   - Frontend: http://localhost:3000 (static file server)
-   - API: http://localhost:3001 (Express server)
-   
-   **Note:** If using Vite or other development servers, the frontend may run on port 5173. The API CORS configuration supports both ports.
+   The API server will be running on http://localhost:3001
 
 ### Individual Commands
 
-- **Frontend only:** `npm run dev:frontend`
-- **API only:** `npm run dev:api`
-
-## API Integration
-
-### Using the API Client
-
-The `assets/js/api.js` file provides a global `window.AurethicaAPI` object with helper methods:
-
-```javascript
-// Example usage
-async function loadStyles() {
-  try {
-    const styles = await window.AurethicaAPI.getStyles();
-    console.log('Loaded styles:', styles);
-  } catch (error) {
-    console.error('Failed to load styles:', error);
-  }
-}
-
-// Available methods:
-// - getStyles() - Get all styles
-// - getStyle(id) - Get specific style
-// - getTips() - Get tips
-// - getMessages() - Get messages  
-// - getOnboarding() - Get onboarding data
-// - checkHealth() - API health check
-```
-
-### Environment Detection
-
-The API client automatically detects the environment:
-- **Development:** Uses `http://localhost:3001` 
-- **Production:** Uses relative URLs (`/api`)
-
-### CORS Configuration
-
-The API server uses environment-based CORS configuration:
-- `CORS_ORIGIN` environment variable controls allowed origins
-- Multiple origins can be separated by commas
-- Default for development: `http://localhost:3000,http://localhost:5173`
-  - Port 3000: Static file server
-  - Port 5173: Vite development server
-- The middleware properly handles preflight OPTIONS requests
+- **API only:** `npm run dev` or `npm start`
 
 ## Available API Endpoints
 
@@ -110,45 +58,17 @@ The API server uses environment-based CORS configuration:
 - `GET /api/messages` - Application messages
 - `GET /api/onboarding` - Onboarding questions
 
-## Connecting Pages to API
+## API Integration
 
-Each HTML page includes the API client. To connect a page to the API:
+### CORS Configuration
 
-1. **Basic connectivity check** (already included):
-   ```javascript
-   if (window.AurethicaAPI) {
-     window.AurethicaAPI.checkHealth()
-       .then(health => console.log('API Health:', health))
-       .catch(err => console.warn('API not available:', err));
-   }
-   ```
-
-2. **Replace local data fetching:**
-   ```javascript
-   // Instead of: fetch('data/styles.json')
-   // Use: window.AurethicaAPI.getStyles()
-   
-   window.AurethicaAPI.getStyles()
-     .then(styles => {
-       // Handle styles data
-     })
-     .catch(error => {
-       console.error('Error loading styles:', error);
-     });
-   ```
+The API server uses environment-based CORS configuration:
+- `CORS_ORIGIN` environment variable controls allowed origins
+- Multiple origins can be separated by commas
+- Default for development: `http://localhost:3000,http://localhost:5173`
+- The middleware properly handles preflight OPTIONS requests
 
 ## Deployment
-
-### Frontend Deployment (Vercel)
-
-1. **Connect repository to Vercel**
-2. **Set build settings:**
-   - Build Command: `npm install`
-   - Output Directory: `.` (root directory)
-   - Install Command: `npm install`
-
-3. **Environment Variables:**
-   - No frontend-specific environment variables needed
 
 ### API Deployment (Render)
 
@@ -163,11 +83,8 @@ Each HTML page includes the API client. To connect a page to the API:
    ```
    NODE_ENV=production
    PORT=10000
-   CORS_ORIGIN=https://your-frontend-domain.vercel.app
+   CORS_ORIGIN=https://your-frontend-domain.com
    ```
-
-5. **Update frontend API base URL:**
-   After deploying the API, update the production base URL in `assets/js/api.js` if needed.
 
 ### CORS Configuration for Production
 
@@ -177,35 +94,31 @@ When deploying, ensure the API's `CORS_ORIGIN` environment variable includes you
 CORS_ORIGIN=https://your-frontend.vercel.app,https://your-custom-domain.com
 ```
 
-## Development Tips
+## Data Management
 
-- Use browser DevTools Console to see API connectivity status
-- Check Network tab to monitor API requests
-- The API serves CORS headers for local development
-- Environment variables are loaded from `.env` file in the `api/` directory
+The API serves data from JSON files located in `api/data/`:
 
-## Troubleshooting
+- `styles.json` - Hair style definitions and metadata
+- `onboarding.json` - Onboarding questionnaire data
+- `messages.json` - Application messages and text content
+- `tips.json` - Hair care tips and recommendations
 
-### API Connection Issues
+These files can be updated directly to modify the API responses without code changes.
 
-1. Check if the API server is running on port 3001
-2. Verify CORS configuration in `api/.env`
-3. Check browser console for error messages
-4. Test API directly: http://localhost:3001/health
+## Testing the API
 
-### Build Issues
+You can test the API endpoints using curl or any HTTP client:
 
-1. Ensure Node.js version is 16.0.0 or higher
-2. Clear npm cache: `npm cache clean --force`
-3. Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
+```bash
+# Health check
+curl http://localhost:3001/health
 
-## Next Steps Checklist
+# Get all styles
+curl http://localhost:3001/api/styles
 
-- [ ] Wire actual UI components to API on each page
-- [ ] Deploy frontend to Vercel
-- [ ] Deploy API to Render
-- [ ] SEO optimization review
-- [ ] Accessibility review
-- [ ] Performance optimization
-- [ ] Error handling improvements
-- [ ] Add loading states to UI components
+# Get specific style
+curl http://localhost:3001/api/styles/nebulosa
+
+# Get API info
+curl http://localhost:3001/api
+```
