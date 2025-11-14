@@ -4,9 +4,12 @@
 **Rama analizada**: copilot/pending-tasks-follow-up  
 **Rama base**: main
 
+> **✅ ACTUALIZACIÓN**: Decisión arquitectónica confirmada por @direccionaurethica-droid el 14 de noviembre de 2025.  
+> **El frontend se está diseñando completamente en Figma. Este repositorio será API-only.**
+
 ## Resumen Ejecutivo
 
-Este documento identifica todas las tareas pendientes, issues abiertos, y pull requests que requieren atención en el repositorio aurethica-site.
+Este documento identifica todas las tareas pendientes, issues abiertos, y pull requests que requieren atención en el repositorio aurethica-site. La decisión arquitectónica ha sido confirmada: el repositorio se enfocará exclusivamente en el backend/API.
 
 ---
 
@@ -33,8 +36,8 @@ Este documento identifica todas las tareas pendientes, issues abiertos, y pull r
 - **Descripción**: Esta PR analiza las tareas pendientes y próximos pasos (documento actual)
 - **Acción**: Completar análisis y solicitar revisión
 
-### PR #27: Clean up repository - Remove obsolete frontend files
-- **Estado**: Borrador (Draft)
+### PR #27: Clean up repository - Remove obsolete frontend files ✅ RECOMENDADA
+- **Estado**: Borrador (Draft) → **DEBE APROBARSE**
 - **Autor**: Copilot
 - **Fecha**: 14 de septiembre de 2025
 - **Descripción**: Propone eliminar todo el frontend (HTML, CSS, JS, imágenes) y mantener solo el backend/API funcional, ya que el frontend ahora se gestiona completamente en Figma
@@ -42,11 +45,11 @@ Este documento identifica todas las tareas pendientes, issues abiertos, y pull r
   - Todos los archivos HTML (index, gallery, current, onboarding, legal, result)
   - Archivos CSS y assets estáticos
   - Configuración frontend (vercel.json, dependencias de http-server y concurrently)
-- **Conflicto**: Esta PR contradice la PR #26 que propone integrar el API con el frontend
-- **Acción recomendada**: Decidir la estrategia del proyecto antes de continuar
+- **✅ Status**: **Confirmada como la dirección correcta** por @direccionaurethica-droid (frontend en Figma)
+- **Acción recomendada**: **Revisar y aprobar esta PR para implementar arquitectura API-only**
 
-### PR #26: Integrate API client and remove static assets
-- **Estado**: Abierto (no draft)
+### PR #26: Integrate API client and remove static assets ❌ NO PROCEDER
+- **Estado**: Abierto (no draft) → **DEBE CERRARSE**
 - **Autor**: direccionaurethica-droid
 - **Fecha**: 10 de septiembre de 2025
 - **Label**: codex
@@ -56,8 +59,8 @@ Este documento identifica todas las tareas pendientes, issues abiertos, y pull r
   - Eliminar directorio de datos estáticos
   - Expandir orígenes CORS por defecto
   - Documentar configuración del backend con el puerto correcto
-- **Conflicto**: Esta PR asume que el frontend se mantiene, contradice PR #27
-- **Acción recomendada**: Decidir si el frontend permanece antes de mergear
+- **❌ Status**: **No proceder** - El frontend ya no estará en este repositorio (gestionado en Figma)
+- **Acción recomendada**: **Cerrar esta PR** con la explicación: "Frontend ahora gestionado completamente en Figma, repositorio será API-only según PR #27"
 
 ### PR #1: Add repository hygiene files for better project governance
 - **Estado**: Borrador (Draft)
@@ -78,30 +81,32 @@ Este documento identifica todas las tareas pendientes, issues abiertos, y pull r
 
 ---
 
-## 🎯 Conflictos y Decisiones Pendientes
+## 🎯 Decisión Arquitectónica
 
-### 1. **Decisión Crítica: Frontend vs API-Only**
-**Conflicto**: Las PRs #26 y #27 proponen estrategias opuestas:
-- **PR #27**: Eliminar todo el frontend, mantener solo API (gestión en Figma)
-- **PR #26**: Mantener y mejorar el frontend, integrándolo con la API
+### 1. **✅ CONFIRMADO: Arquitectura API-Only**
+**Decisión tomada por @direccionaurethica-droid**: 
+- El frontend se está diseñando completamente en Figma
+- **PR #27** (eliminar todo el frontend, mantener solo API) es la dirección correcta
+- **PR #26** (integrar frontend con API) debe cerrarse ya que el frontend ya no estará en este repositorio
 
-**Impacto**: Esta decisión afecta la arquitectura completa del proyecto
+**Impacto**: Esta decisión confirma que el repositorio será exclusivamente para el backend/API
 
-**Opciones**:
-- **Opción A**: Aceptar PR #27 - Repositorio API-only
-  - ✅ Pros: Separación clara de responsabilidades, frontend en Figma
-  - ❌ Contras: Se pierde el frontend actual funcional
+**Decisión Final**:
+- **✅ Aceptar PR #27** - Repositorio API-only
+  - ✅ Separación clara de responsabilidades
+  - ✅ Frontend gestionado profesionalmente en Figma
+  - ✅ Repositorio enfocado únicamente en la API
   
-- **Opción B**: Aceptar PR #26 - Integración frontend/API
-  - ✅ Pros: Mantiene funcionalidad completa en el repo
-  - ❌ Contras: Duplicación si hay frontend en Figma
+- **❌ Cerrar PR #26** - No proceder con integración frontend/API
+  - Frontend ya no estará en este repositorio
+  - Cambios propuestos no son relevantes para arquitectura API-only
 
-**Recomendación**: Clarificar con el equipo si realmente existe un frontend en Figma que reemplaza el actual, o si el frontend actual debe mantenerse y mejorarse.
+**Status**: Decisión confirmada el 14 de noviembre de 2025
 
 ### 2. **Banner Obsoleto (Issue #22)**
-- **Acción**: Una vez definida la estrategia del frontend, resolver el issue #22
-- **Si se mantiene el frontend**: Actualizar o eliminar el banner en los archivos HTML
-- **Si se elimina el frontend**: El issue se resuelve automáticamente al eliminar los archivos
+- **Acción**: ✅ El issue se resolverá automáticamente
+- **Razón**: Con la arquitectura API-only confirmada, todos los archivos HTML (incluyendo el banner obsoleto) serán eliminados por PR #27
+- **Status**: Se cerrará automáticamente al mergear PR #27
 
 ---
 
@@ -126,32 +131,22 @@ Este documento identifica todas las tareas pendientes, issues abiertos, y pull r
 
 ---
 
-## 🚀 Plan de Acción Recomendado
+## 🚀 Plan de Acción Actualizado
 
-### Paso 1: Decisión de Arquitectura (URGENTE)
-- [ ] Reunión con stakeholders para decidir entre:
-  - API-only (PR #27)
-  - Frontend + API integrado (PR #26)
-- [ ] Documentar la decisión y la justificación
+### ✅ Paso 1: Decisión de Arquitectura - COMPLETADO
+- [x] Decisión confirmada por @direccionaurethica-droid
+- [x] Arquitectura API-only (frontend en Figma)
+- [x] Decisión documentada
 
-### Paso 2: Según decisión - Opción A (API-only)
-Si se decide ir con API-only:
-- [ ] Revisar y aprobar PR #27
-- [ ] Cerrar PR #26 como "won't fix" con explicación
-- [ ] Cerrar Issue #22 (se resuelve con eliminación del frontend)
+### Paso 2: Implementar Arquitectura API-only
+- [ ] Revisar y aprobar **PR #27** (eliminar frontend)
+- [ ] Cerrar **PR #26** como "won't fix" con explicación: "Frontend ahora gestionado en Figma, repositorio será API-only"
+- [ ] Cerrar **Issue #22** automáticamente (se resuelve con eliminación del frontend)
 - [ ] Actualizar README para reflejar naturaleza API-only
-- [ ] Revisar y mergear PR #1 (archivos de gobernanza)
-
-### Paso 2: Según decisión - Opción B (Frontend + API)
-Si se decide mantener el frontend:
-- [ ] Cerrar PR #27 como "won't fix" con explicación
-- [ ] Revisar y aprobar PR #26 (integración API)
-- [ ] Resolver Issue #22 identificando y eliminando/actualizando el banner obsoleto
-- [ ] Revisar y mergear PR #1 (archivos de gobernanza)
-- [ ] Actualizar documentación para reflejar arquitectura dual
+- [ ] Revisar y mergear **PR #1** (archivos de gobernanza - independiente de arquitectura)
 
 ### Paso 3: Completar Esta PR (#28)
-- [ ] Incorporar feedback del equipo
+- [x] Incorporar feedback del equipo
 - [ ] Marcar como ready for review
 - [ ] Solicitar aprobación
 

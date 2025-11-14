@@ -8,14 +8,13 @@ Hay **1 issue abierto** y **4 pull requests pendientes** que requieren decisione
 
 ## 📌 Lo Más Urgente
 
-### Decisión Crítica Requerida
-**Conflicto entre PRs #26 y #27**:
-- **PR #27** propone eliminar TODO el frontend (gestión en Figma)
-- **PR #26** propone mantener e integrar el frontend con la API
+### ✅ Decisión Arquitectónica Confirmada
+**Arquitectura API-only confirmada por @direccionaurethica-droid**:
+- El frontend se está diseñando completamente en Figma
+- **PR #27** (eliminar frontend, mantener solo API) es la dirección correcta
+- **PR #26** debe cerrarse (propone mantener frontend que ya no se usa)
 
-**Impacto**: Esta decisión define la arquitectura completa del proyecto.
-
-**Acción requerida**: Reunión con stakeholders para decidir la estrategia.
+**Acción requerida**: Proceder con PR #27 y cerrar PR #26.
 
 ---
 
@@ -52,11 +51,12 @@ Análisis de tareas pendientes - documento actual
 
 ## 🚀 Plan de Acción Recomendado
 
-1. **URGENTE**: Decidir entre API-only (PR #27) o Frontend+API (PR #26)
-2. Según decisión, aprobar PR correspondiente y cerrar la otra
-3. Resolver Issue #22 (se resuelve automáticamente si se elimina el frontend)
-4. Revisar y mergear PR #1 (archivos de gobernanza)
-5. Completar esta PR (#28) con el análisis
+1. ✅ **CONFIRMADO**: Arquitectura API-only (frontend en Figma)
+2. **Aprobar y mergear PR #27** (eliminar frontend del repositorio)
+3. **Cerrar PR #26** con explicación (frontend ahora en Figma)
+4. **Cerrar Issue #22** (se resuelve automáticamente al eliminar frontend)
+5. **Revisar y mergear PR #1** (archivos de gobernanza - independiente)
+6. **Completar esta PR (#28)** con el análisis actualizado
 
 ---
 
